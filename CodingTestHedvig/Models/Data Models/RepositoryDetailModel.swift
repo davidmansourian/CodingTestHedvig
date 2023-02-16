@@ -15,5 +15,3 @@ struct RepositoryDetailModel: Identifiable{
     let repositoryOwner: String
     let ownerImage: UIImage
 }
-
-let repo1 = RepositoryDetailModel(repositoryTitle: "Best App Ever", repositoryDescription: "This is the best app ever", repositoryOwner: "davidmansourian", ownerImage: UIImage())

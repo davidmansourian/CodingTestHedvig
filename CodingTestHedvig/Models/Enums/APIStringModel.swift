@@ -8,5 +8,5 @@
 import Foundation
 
 enum SearchType: String{
-    case userRepository = "/repos"
+    case userSearch = "/users?q="
 }

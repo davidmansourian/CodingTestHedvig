@@ -8,32 +8,58 @@
 import Foundation
 import SwiftUI
 
-class APILoader{
-    static let shared = APILoader()
+class APIService{
+    static let shared = APIService()
     
-    @Published var userResultModel: [Welcome3Element]?
+    @Published var fetchedRepositories: [Welcome3Element]?
+    @Published var fetchedProfiles: [ProfileDataModel]?
     private var jsonDecoder = JSONDecoder()
-    private var searchType = SearchType.userRepository
+    private var searchType = SearchType.userSearch
     
     // https://api.github.com/search/users?q=davidmansourian
+    
+    // Rules: Admit a maximum of three users from user results.
+    // Grab only repo url
+    // Show repos for admitted users
+    //
+    // Another idea is to list the top three or five git profiles and
+    // let the user pick the profile from that list
+    // Perhaps this is more efficient in selecting the desired profile
+    // When searching for "david", there are several profiles that pops up.
     
 
     
    private init(){}
     
-    func loadData(url: String) async -> [Welcome3Element]{
-        guard let urlString = URL(string: url) else { return [] }
-        var searchResult: [Welcome3Element] = []
+    
+    func loadProfiles(url: String) async throws -> ProfileDataModel{
+        guard let urlString = URL(string: url) else { throw URLError(.badURL) }
+        var searchResults: ProfileDataModel
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(from: urlString)
+            searchResults = try JSONDecoder().decode(ProfileDataModel.self, from: data)
+        } catch{
+            throw error
+        }
+        print(searchResults)
+        return searchResults
+    }
+    
+    func loadRepositoryData(url: String) async throws -> [Welcome3Element]{
+        guard let urlString = URL(string: url) else { throw URLError(.badURL) }
+        var searchResults: [Welcome3Element] = []
         
         do{
             let (data, _) = try await URLSession.shared.data(from: urlString)
-            searchResult = try JSONDecoder().decode([Welcome3Element].self, from: data)
+            searchResults = try JSONDecoder().decode([Welcome3Element].self, from: data)
         } catch {
-            print(error)
+            throw error
         }
-        print(searchResult)
-        return searchResult
+        print(searchResults)
+        return searchResults
     }
+    
     
     
     func handleImageResponse(data: Data?, response: URLResponse?) -> UIImage? {
