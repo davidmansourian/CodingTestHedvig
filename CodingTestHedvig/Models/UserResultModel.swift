@@ -21,7 +21,7 @@ import Foundation
 
 
 
-struct Welcome3Element: Decodable, Identifiable{
+struct Welcome3Element: Decodable{
     let id: Int
     let name: String?
     let fullName: String?

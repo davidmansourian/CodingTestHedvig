@@ -7,12 +7,12 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
-class APILoader: ObservableObject{
-   // static let shared = APILoader()
+class APILoader{
+    static let shared = APILoader()
     
     @Published var userResultModel: [Welcome3Element]?
-    @Published var searchString: String = ""
     @Published var fetchType: String = ""
     
     private var jsonDecoder = JSONDecoder()
@@ -21,34 +21,48 @@ class APILoader: ObservableObject{
     
     // https://api.github.com/search/users?q=davidmansourian
     
-    var fetchUrl = ""
 
     
-    init(){
-        $searchString
-            .debounce(for: .seconds(0.5), scheduler: DispatchQueue.global(qos: .default))
-            .sink{ [weak self] searchTerm in
-                if searchTerm == ""{
-                    //
-                } else {
-                    self?.fetchUrl = "https://api.github.com/users/\(searchTerm)/repos"
-                }
-                
-            }
-            .store(in: &cancellables)
-    }
+   private init(){}
     
-    func loadData(url: String) async{
-        guard let urlString = URL(string: url) else { return }
+    func loadData(url: String) async -> [Welcome3Element]{
+        guard let urlString = URL(string: url) else { return [] }
+        var searchResult: [Welcome3Element] = []
         
         do{
             let (data, _) = try await URLSession.shared.data(from: urlString)
-            self.userResultModel = try JSONDecoder().decode([Welcome3Element].self, from: data)
-            print(self.userResultModel)
+            searchResult = try JSONDecoder().decode([Welcome3Element].self, from: data)
         } catch {
             print(error)
         }
+        print(searchResult)
+        return searchResult
+    }
+    
+    
+    func handleImageResponse(data: Data?, response: URLResponse?) -> UIImage? {
+        guard
+            let data = data,
+            let image = UIImage(data: data),
+            let response = response as? HTTPURLResponse,
+            response.statusCode >= 200 && response.statusCode < 300 else {
+                return nil
+        }
         
+        return image
+    }
+    
+    
+    func downloadImage(urlString: String) async throws -> UIImage? {
+        guard let url = URL(string: urlString) else { throw URLError(.badURL) }
+        
+        do {
+            let (data, response) = try await URLSession.shared.data(from: url, delegate: nil)
+            let image = handleImageResponse(data: data, response: response)
+            return image
+        } catch {
+            throw error
+        }
     }
     
     

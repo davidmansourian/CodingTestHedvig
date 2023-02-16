@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject var apiLoader = APILoader()
+    //@StateObject var apiLoader = APILoader()
+    @StateObject var searchResultVm = SearchResultViewModel()
     var body: some View {
-        List(apiLoader.userResultModel ?? []){ results in
-            Text(results.name ?? "Empty")
+        List(searchResultVm.repositoryDetail){ theResult in
+            Image(uiImage: theResult.ownerImage)
         }
-        .task{
-           await apiLoader.loadData(url: "https://api.github.com/users/davidmansourian/repos")
+        .onAppear{
+            searchResultVm.loadRepositoryModel(url: "https://api.github.com/users/sada20ig/repos")
         }
     }
 }
