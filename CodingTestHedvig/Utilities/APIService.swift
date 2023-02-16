@@ -14,10 +14,13 @@ class APILoader: ObservableObject{
     @Published var userResultModel: UserResultModel?
     @Published var searchString: String = ""
     @Published var fetchType: String = ""
+    @Published var username: String = ""
     
     private var jsonDecoder = JSONDecoder()
     private var cancellables = Set<AnyCancellable>()
     private var searchType = SearchType.user
+    
+    // https://api.github.com/search/users?q=davidmansourian
     
     let fetchUrl = "https://api.github.com/"
     
@@ -33,6 +36,16 @@ class APILoader: ObservableObject{
                 
             }
             .store(in: &cancellables)
+    }
+    
+    func urlBuilder(searchString: String){
+        var components = URLComponents(string: fetchUrl)
+        
+        components?.queryItems = [URLQueryItem(name: "searchType", value: searchType.rawValue),
+                                  URLQueryItem(name: "username", value: self.username)
+                                  
+            
+        ]
     }
     
     

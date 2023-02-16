@@ -7,21 +7,68 @@
 
 import Foundation
 
-struct UserResultModel: Decodable{
-    let totalCount: Int
-    let incompleteResults: Bool
-    let items: [Item]
+// Serach result show repos by user, as well as repos that
+// the user has contributed in
+
+// When initial implementations have been added, I want to add some
+// additional functionalities:
+// - Besides collaborators and languages, show
+// Total issues and number of issues closed v. opened
+// - tags
+// - number of commits
+// - last commit
+// potential to clone (git & ssh urls)
+
+
+
+struct UserRepositories: Decodable{
 }
 
-struct Item: Decodable{
+struct Repository: Decodable{
+    let id: Int
+    let name: String
+    let fullName: String
+    let isPrivate: String
+    let owner: RepositoryOwner
+    let repoUrl: String
+    let description: String
+    let contributorsUrl: String
+    let hasIssues: Bool
+    let hasWiki: Bool
+    let issueCount: Int
+    let watchers: Int
+    
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case fullName = "full_name"
+        case isPrivate = "private"
+        case owner
+        case repoUrl = "url"
+        case description
+        case contributorsUrl = "contributors_url"
+        case hasIssues = "has_issues"
+        case hasWiki = "has_wiki"
+        case issueCount = "open_issues_count"
+        case watchers
+        
+    
+    }
+}
+
+struct RepositoryOwner: Decodable{
     let login: String
     let id: Int
-    let avatarURL: String
-    let url, htmlURL, followersURL: String
-    let followingURL, gistsURL, starredURL: String
-    let subscriptionsURL, organizationsURL, reposURL: String
-    let eventsURL: String
-    let receivedEventsURL: String
+    let avatarUrl: String
+    let reposUrl: String
     let type: String
-    let score: Double
+    
+    enum CodingKeys: String, CodingKey{
+        case login
+        case id
+        case avatarUrl = "avatar_url"
+        case reposUrl = "repos_url"
+        case type
+    }
 }
