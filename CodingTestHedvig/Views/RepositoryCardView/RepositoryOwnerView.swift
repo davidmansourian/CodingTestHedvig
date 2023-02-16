@@ -16,7 +16,7 @@ struct RepositoryOwnerView: View {
         _owner = State(wrappedValue: owner)
     }
     var body: some View {
-        Text(" by \(owner)")
+        Text("owned by \(owner)")
             .font(.callout)
             .fontWeight(.thin)
             .padding(.bottom, 3)

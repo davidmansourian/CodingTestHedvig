@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchInstructionView: View {
     var body: some View {
         HStack{
-            Text("Search for users to view related repos")
+            Text("Search profiles and view related repos")
                 .font(.title)
                 .fontWeight(.ultraLight)
                 .padding()
@@ -19,7 +19,7 @@ struct SearchInstructionView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(height: 60)
-                .opacity(0.3)
+                .opacity(0.2)
         }
         .padding()
     }
