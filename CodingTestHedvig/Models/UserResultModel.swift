@@ -21,22 +21,19 @@ import Foundation
 
 
 
-struct UserRepositories: Decodable{
-}
-
-struct Repository: Decodable{
+struct Welcome3Element: Decodable, Identifiable{
     let id: Int
-    let name: String
-    let fullName: String
-    let isPrivate: String
-    let owner: RepositoryOwner
-    let repoUrl: String
-    let description: String
-    let contributorsUrl: String
-    let hasIssues: Bool
-    let hasWiki: Bool
-    let issueCount: Int
-    let watchers: Int
+    let name: String?
+    let fullName: String?
+    let isPrivate: Bool?
+    let owner: Owner?
+    let repoUrl: String?
+    let description: String?
+    let contributorsUrl: String?
+    let hasIssues: Bool?
+    let hasWiki: Bool?
+    let issueCount: Int?
+    let watchers: Int?
     
     
     enum CodingKeys: String, CodingKey {
@@ -57,7 +54,7 @@ struct Repository: Decodable{
     }
 }
 
-struct RepositoryOwner: Decodable{
+struct Owner: Decodable{
     let login: String
     let id: Int
     let avatarUrl: String
@@ -72,3 +69,5 @@ struct RepositoryOwner: Decodable{
         case type
     }
 }
+
+typealias RepositoryResults = [Welcome3Element]

@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject var apiLoader = APILoader()
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List(apiLoader.userResultModel ?? []){ results in
+            Text(results.name ?? "Empty")
+        }
+        .task{
+           await apiLoader.loadData(url: "https://api.github.com/users/davidmansourian/repos")
+        }
     }
 }
 
