@@ -8,17 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		DB369064299E306700B76091 /* CodingTestHedvigApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB369063299E306700B76091 /* CodingTestHedvigApp.swift */; };
-		DB369066299E306700B76091 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB369065299E306700B76091 /* ContentView.swift */; };
 		DB369068299E306800B76091 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB369067299E306800B76091 /* Assets.xcassets */; };
 		DB36906B299E306800B76091 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB36906A299E306800B76091 /* Preview Assets.xcassets */; };
+		DB369075299E30CC00B76091 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB369074299E30CC00B76091 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DB369060299E306700B76091 /* CodingTestHedvig.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodingTestHedvig.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB369063299E306700B76091 /* CodingTestHedvigApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodingTestHedvigApp.swift; sourceTree = "<group>"; };
-		DB369065299E306700B76091 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DB369067299E306800B76091 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB36906A299E306800B76091 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DB369074299E30CC00B76091 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +51,10 @@
 		DB369062299E306700B76091 /* CodingTestHedvig */ = {
 			isa = PBXGroup;
 			children = (
+				DB369073299E30AC00B76091 /* Models */,
+				DB369072299E30A100B76091 /* ViewModels */,
+				DB369071299E309B00B76091 /* Views */,
 				DB369063299E306700B76091 /* CodingTestHedvigApp.swift */,
-				DB369065299E306700B76091 /* ContentView.swift */,
 				DB369067299E306800B76091 /* Assets.xcassets */,
 				DB369069299E306800B76091 /* Preview Content */,
 			);
@@ -65,6 +67,28 @@
 				DB36906A299E306800B76091 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DB369071299E309B00B76091 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DB369074299E30CC00B76091 /* HomeView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DB369072299E30A100B76091 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		DB369073299E30AC00B76091 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB369066299E306700B76091 /* ContentView.swift in Sources */,
+				DB369075299E30CC00B76091 /* HomeView.swift in Sources */,
 				DB369064299E306700B76091 /* CodingTestHedvigApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
