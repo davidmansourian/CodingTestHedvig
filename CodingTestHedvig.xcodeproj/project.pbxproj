@@ -14,9 +14,10 @@
 		DB369078299E37BA00B76091 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB369077299E37BA00B76091 /* APIService.swift */; };
 		DB36907A299E3DCF00B76091 /* UserResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB369079299E3DCF00B76091 /* UserResultModel.swift */; };
 		DB36907C299E408300B76091 /* APIStringModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB36907B299E408300B76091 /* APIStringModel.swift */; };
-		DB369080299E6BF100B76091 /* SearchResultRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB36907F299E6BF100B76091 /* SearchResultRowView.swift */; };
+		DB369080299E6BF100B76091 /* SearchResultCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB36907F299E6BF100B76091 /* SearchResultCardView.swift */; };
 		DB369082299E6D8400B76091 /* RepositoryDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB369081299E6D8400B76091 /* RepositoryDetailModel.swift */; };
 		DB369084299E6DE300B76091 /* SearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB369083299E6DE300B76091 /* SearchResultViewModel.swift */; };
+		DB369087299E87B100B76091 /* ButtonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB369086299E87B000B76091 /* ButtonViews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,9 +29,10 @@
 		DB369077299E37BA00B76091 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		DB369079299E3DCF00B76091 /* UserResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResultModel.swift; sourceTree = "<group>"; };
 		DB36907B299E408300B76091 /* APIStringModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStringModel.swift; sourceTree = "<group>"; };
-		DB36907F299E6BF100B76091 /* SearchResultRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultRowView.swift; sourceTree = "<group>"; };
+		DB36907F299E6BF100B76091 /* SearchResultCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCardView.swift; sourceTree = "<group>"; };
 		DB369081299E6D8400B76091 /* RepositoryDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailModel.swift; sourceTree = "<group>"; };
 		DB369083299E6DE300B76091 /* SearchResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewModel.swift; sourceTree = "<group>"; };
+		DB369086299E87B000B76091 /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,8 +87,9 @@
 		DB369071299E309B00B76091 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DB369085299E879900B76091 /* Reusables */,
 				DB369074299E30CC00B76091 /* HomeView.swift */,
-				DB36907F299E6BF100B76091 /* SearchResultRowView.swift */,
+				DB36907F299E6BF100B76091 /* SearchResultCardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -115,6 +118,14 @@
 				DB369077299E37BA00B76091 /* APIService.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		DB369085299E879900B76091 /* Reusables */ = {
+			isa = PBXGroup;
+			children = (
+				DB369086299E87B000B76091 /* ButtonViews.swift */,
+			);
+			path = Reusables;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,12 +200,13 @@
 			files = (
 				DB36907C299E408300B76091 /* APIStringModel.swift in Sources */,
 				DB369075299E30CC00B76091 /* HomeView.swift in Sources */,
-				DB369080299E6BF100B76091 /* SearchResultRowView.swift in Sources */,
+				DB369080299E6BF100B76091 /* SearchResultCardView.swift in Sources */,
 				DB369078299E37BA00B76091 /* APIService.swift in Sources */,
 				DB369082299E6D8400B76091 /* RepositoryDetailModel.swift in Sources */,
 				DB369064299E306700B76091 /* CodingTestHedvigApp.swift in Sources */,
 				DB36907A299E3DCF00B76091 /* UserResultModel.swift in Sources */,
 				DB369084299E6DE300B76091 /* SearchResultViewModel.swift in Sources */,
+				DB369087299E87B100B76091 /* ButtonViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

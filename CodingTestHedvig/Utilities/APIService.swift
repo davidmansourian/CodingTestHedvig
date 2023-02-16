@@ -6,17 +6,13 @@
 //
 
 import Foundation
-import Combine
 import SwiftUI
 
 class APILoader{
     static let shared = APILoader()
     
     @Published var userResultModel: [Welcome3Element]?
-    @Published var fetchType: String = ""
-    
     private var jsonDecoder = JSONDecoder()
-    private var cancellables = Set<AnyCancellable>()
     private var searchType = SearchType.userRepository
     
     // https://api.github.com/search/users?q=davidmansourian
