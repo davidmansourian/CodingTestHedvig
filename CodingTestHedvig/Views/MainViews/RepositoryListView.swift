@@ -27,7 +27,7 @@ struct RepositoryListView: View {
                                 .offset(y:50)
                         case .showingResult:
                             ForEach(repositoryResultsVm.repositoryDetail){ theResult in
-                                RepositoryCardView(searchResultVm: repositoryResultsVm, image: theResult.ownerImage, title: theResult.repositoryTitle, description: theResult.repositoryDescription, owner: theResult.repositoryOwner)
+                                RepositoryCardView(searchResultVm: repositoryResultsVm, image: theResult.ownerImage, title: theResult.repositoryTitle, description: theResult.repositoryDescription, owner: theResult.repositoryOwner, watchers: theResult.watchers)
                                 
                                 Divider()
                             }

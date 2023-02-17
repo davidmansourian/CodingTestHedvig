@@ -39,6 +39,7 @@ struct HomeView: View{
                                 Divider()
                                 
                             }
+                            .animation(.default, value: profileResultsVm.searchString)
                         }
                     }
                 }

@@ -13,13 +13,15 @@ struct RepositoryCardView: View {
     @State var title: String
     @State var description: String
     @State var owner: String
+    @State var watchers: Int
     
-    init(searchResultVm: RepositoryResultsViewModel, image: UIImage, title: String, description: String, owner: String){
+    init(searchResultVm: RepositoryResultsViewModel, image: UIImage, title: String, description: String, owner: String, watchers: Int){
         _searchResultVm = StateObject(wrappedValue: searchResultVm)
         _image = State(wrappedValue: image)
         _title = State(wrappedValue: title)
         _description = State(wrappedValue: description)
         _owner = State(wrappedValue: owner)
+        _watchers = State(wrappedValue: watchers)
     }
     var body: some View {
         VStack(alignment: .leading){
@@ -43,6 +45,10 @@ struct RepositoryCardView: View {
                 RepositoryProfileAvatarView(searchResultVm: searchResultVm, image: image)
                 
                 RepositoryOwnerView(searchResultVm: searchResultVm, owner: owner)
+                
+                Spacer()
+                
+                RepositoryWatchersView(searchResultVm: searchResultVm, watchers: watchers)
             }
             .padding(.horizontal)
         }

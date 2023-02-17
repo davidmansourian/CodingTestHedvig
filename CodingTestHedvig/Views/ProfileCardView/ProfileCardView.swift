@@ -26,39 +26,26 @@ struct ProfileCardView: View {
             VStack(alignment: .leading, spacing: 4){
                 
                 HStack(spacing: 20){
-                    Image(uiImage: image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 50)
-                        .clipShape(Circle())
-                        .padding(.bottom, 3)
                     
-                    Text(username)
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .padding(.bottom, 3)
+                    ProfileAvatarView(profileResultsVm: profileResultsVm, image: image)
+                    
+                    ProfileUsernameView(profileResultsVm: profileResultsVm, username: username)
                     
                     Spacer()
                     
-                    Image(systemName: "chevron.right")
-                            .padding(.bottom, 3)
-
-
-  
+                    ChevronRightView()
                 }
                 .padding(.top, 3)
             }
             .padding(.horizontal)
             
             HStack{
-                Text(type)
-                    .font(.body)
-                    .fontWeight(.ultraLight)
+                
+                ProfileTypeView(profileResultsVm: profileResultsVm, type: type)
                 
                 Spacer()
             }
             .padding(.horizontal)
         }
-        
     }
 }

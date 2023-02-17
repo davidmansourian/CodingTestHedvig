@@ -24,7 +24,7 @@ import SwiftUI
                 guard let imageUrl = theResult.owner?.avatarUrl else { return }
                 let image = try await APIService.shared.downloadImage(urlString: imageUrl)
                 
-                self.repositoryDetail.append(RepositoryDetailModel(repositoryTitle: theResult.name ?? "", repositoryDescription: theResult.description ?? "", repositoryOwner: theResult.owner?.login ?? "", ownerImage: image ?? UIImage()))
+                self.repositoryDetail.append(RepositoryDetailModel(repositoryTitle: theResult.name ?? "", repositoryDescription: theResult.description ?? "", repositoryOwner: theResult.owner?.login ?? "", ownerImage: image ?? UIImage(), watchers: theResult.watchers ?? 0))
             }
             self.viewState = RepositoryViewState.showingResult
         }

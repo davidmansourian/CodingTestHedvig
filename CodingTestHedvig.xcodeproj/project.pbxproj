@@ -30,6 +30,11 @@
 		DB3690A7299EE2C400B76091 /* ProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690A6299EE2C400B76091 /* ProfileCardView.swift */; };
 		DB3690AB299EF24700B76091 /* RepositoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690AA299EF24700B76091 /* RepositoryListView.swift */; };
 		DB3690AD299EF32000B76091 /* ViewStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690AC299EF32000B76091 /* ViewStates.swift */; };
+		DB3690AF299F7B5F00B76091 /* RepositoryWatchersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690AE299F7B5F00B76091 /* RepositoryWatchersView.swift */; };
+		DB3690B1299F7C6100B76091 /* ProfileAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690B0299F7C6100B76091 /* ProfileAvatarView.swift */; };
+		DB3690B3299F7CA300B76091 /* ProfileUsernameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690B2299F7CA300B76091 /* ProfileUsernameView.swift */; };
+		DB3690B5299F7D0900B76091 /* ChevronIconViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690B4299F7D0900B76091 /* ChevronIconViews.swift */; };
+		DB3690B7299F7D4200B76091 /* ProfileTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690B6299F7D4200B76091 /* ProfileTypeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +62,11 @@
 		DB3690A6299EE2C400B76091 /* ProfileCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCardView.swift; sourceTree = "<group>"; };
 		DB3690AA299EF24700B76091 /* RepositoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryListView.swift; sourceTree = "<group>"; };
 		DB3690AC299EF32000B76091 /* ViewStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStates.swift; sourceTree = "<group>"; };
+		DB3690AE299F7B5F00B76091 /* RepositoryWatchersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryWatchersView.swift; sourceTree = "<group>"; };
+		DB3690B0299F7C6100B76091 /* ProfileAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAvatarView.swift; sourceTree = "<group>"; };
+		DB3690B2299F7CA300B76091 /* ProfileUsernameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUsernameView.swift; sourceTree = "<group>"; };
+		DB3690B4299F7D0900B76091 /* ChevronIconViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChevronIconViews.swift; sourceTree = "<group>"; };
+		DB3690B6299F7D4200B76091 /* ProfileTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTypeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,12 +121,10 @@
 		DB369071299E309B00B76091 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DB3690B8299F7DA900B76091 /* MainViews */,
 				DB369096299ED1A000B76091 /* Reusables */,
 				DB369095299ED0FA00B76091 /* ProfileCardView */,
 				DB36908A299ECDFC00B76091 /* RepositoryCardView */,
-				DB369074299E30CC00B76091 /* HomeView.swift */,
-				DB3690A0299ED61400B76091 /* SearchInstructionView.swift */,
-				DB3690AA299EF24700B76091 /* RepositoryListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -156,6 +164,7 @@
 				DB36908F299ECE5C00B76091 /* RepositoryProfileAvatarView.swift */,
 				DB369091299ECE6600B76091 /* RepositoryOwnerView.swift */,
 				DB369093299ECEFC00B76091 /* ViewRepositoryButtonView.swift */,
+				DB3690AE299F7B5F00B76091 /* RepositoryWatchersView.swift */,
 			);
 			path = RepositoryCardView;
 			sourceTree = "<group>";
@@ -164,6 +173,9 @@
 			isa = PBXGroup;
 			children = (
 				DB3690A6299EE2C400B76091 /* ProfileCardView.swift */,
+				DB3690B0299F7C6100B76091 /* ProfileAvatarView.swift */,
+				DB3690B2299F7CA300B76091 /* ProfileUsernameView.swift */,
+				DB3690B6299F7D4200B76091 /* ProfileTypeView.swift */,
 			);
 			path = ProfileCardView;
 			sourceTree = "<group>";
@@ -172,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				DB369098299ED1B900B76091 /* LoadingIndicatorView.swift */,
+				DB3690B4299F7D0900B76091 /* ChevronIconViews.swift */,
 			);
 			path = Reusables;
 			sourceTree = "<group>";
@@ -194,6 +207,16 @@
 				DB3690AC299EF32000B76091 /* ViewStates.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		DB3690B8299F7DA900B76091 /* MainViews */ = {
+			isa = PBXGroup;
+			children = (
+				DB3690A0299ED61400B76091 /* SearchInstructionView.swift */,
+				DB3690AA299EF24700B76091 /* RepositoryListView.swift */,
+				DB369074299E30CC00B76091 /* HomeView.swift */,
+			);
+			path = MainViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +290,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB36908E299ECE4E00B76091 /* RepositoryDescriptionView.swift in Sources */,
+				DB3690B1299F7C6100B76091 /* ProfileAvatarView.swift in Sources */,
+				DB3690AF299F7B5F00B76091 /* RepositoryWatchersView.swift in Sources */,
 				DB369089299ECB0900B76091 /* ProfileDataModel.swift in Sources */,
 				DB36907C299E408300B76091 /* APIStringModel.swift in Sources */,
 				DB369094299ECEFC00B76091 /* ViewRepositoryButtonView.swift in Sources */,
@@ -280,10 +305,13 @@
 				DB3690A7299EE2C400B76091 /* ProfileCardView.swift in Sources */,
 				DB3690AD299EF32000B76091 /* ViewStates.swift in Sources */,
 				DB369064299E306700B76091 /* CodingTestHedvigApp.swift in Sources */,
+				DB3690B3299F7CA300B76091 /* ProfileUsernameView.swift in Sources */,
 				DB36907A299E3DCF00B76091 /* RepositoryDataModel.swift in Sources */,
+				DB3690B5299F7D0900B76091 /* ChevronIconViews.swift in Sources */,
 				DB3690A1299ED61400B76091 /* SearchInstructionView.swift in Sources */,
 				DB3690A5299EDECB00B76091 /* ProfileDetailModel.swift in Sources */,
 				DB369090299ECE5C00B76091 /* RepositoryProfileAvatarView.swift in Sources */,
+				DB3690B7299F7D4200B76091 /* ProfileTypeView.swift in Sources */,
 				DB3690A3299EDD8800B76091 /* ProfileResultsViewModel.swift in Sources */,
 				DB369084299E6DE300B76091 /* RepositoryResultsViewModel.swift in Sources */,
 				DB36908C299ECE4500B76091 /* RepositoryTitleView.swift in Sources */,
