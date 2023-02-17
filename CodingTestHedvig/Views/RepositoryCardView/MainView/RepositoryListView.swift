@@ -25,6 +25,9 @@ struct RepositoryListView: View {
                         case .loading:
                             LoadingIndicatorView()
                                 .offset(y:50)
+                        case .isEmpty:
+                            NoRepositoriesView()
+                                .offset(y: 200)
                         case .showingResult:
                             ForEach(repositoryResultsVm.repositoryDetail){ theResult in
                                 RepositoryCardView(searchResultVm: repositoryResultsVm, image: theResult.ownerImage, title: theResult.repositoryTitle, description: theResult.repositoryDescription, owner: theResult.repositoryOwner, watchers: theResult.watchers)

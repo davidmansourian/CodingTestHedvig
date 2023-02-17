@@ -10,8 +10,8 @@ import SwiftUI
 struct SearchInstructionView: View {
     var body: some View {
         HStack{
-            Text("Search profiles and view related repos")
-                .font(.title)
+            Text("Find git profiles and view related repos")
+                .font(.title2)
                 .fontWeight(.ultraLight)
                 .padding()
             

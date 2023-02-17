@@ -20,12 +20,6 @@ import Foundation
 // potential to clone (git & ssh urls)
 
 
-
-
-
-
-
-
 struct Welcome3Element: Decodable{
     let id: Int
     let name: String?

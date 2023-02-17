@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HomeView: View{
+struct ProfileSearchView: View{
     @StateObject var profileResultsVm = ProfileResultsViewModel()
     @StateObject var repositoryVm = RepositoryResultsViewModel()
     
@@ -23,6 +23,9 @@ struct HomeView: View{
                         case .loading:
                             LoadingIndicatorView()
                                 .offset(y: 50)
+                        case .noResult:
+                            NoResultView()
+                                .offset(y: 200)
                         case .showingResult:
                             ForEach(profileResultsVm.profileResults){ theResult in
                                 NavigationLink {
@@ -50,36 +53,3 @@ struct HomeView: View{
         }
     }
 }
-
-/*struct HomeView: View {
-    @StateObject var repositoryResultsVm = RepositoryResultsViewModel()
-    var body: some View {
-        ZStack {
-            Color.white // Change color
-                .edgesIgnoringSafeArea(.all)
-            NavigationStack{
-                ScrollView(.vertical, showsIndicators: true){
-                    VStack{
-                        switch repositoryResultsVm.viewState{
-                        case .noSearchString:
-                            SearchInstructionView()
-                                .offset(y: 200)
-                        case .loading:
-                            LoadingIndicatorView()
-                                .offset(y:50)
-                        case .showingResult:
-                            ForEach(repositoryResultsVm.repositoryDetail){ theResult in
-                                RepositoryCardView(searchResultVm: repositoryResultsVm, image: theResult.ownerImage, title: theResult.repositoryTitle, description: theResult.repositoryDescription, owner: theResult.repositoryOwner)
-                                
-                                Divider()
-                            }
-                        }
-                        
-                    }
-                }
-            }
-            .searchable(text: $repositoryResultsVm.searchString).autocorrectionDisabled()
-            .scrollDismissesKeyboard(.immediately)
-        }
-    }
-}*/

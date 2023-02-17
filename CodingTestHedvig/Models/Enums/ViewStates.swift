@@ -9,9 +9,9 @@ import Foundation
 
 
 enum SearchResultViewState{
-    case noSearchString, loading, showingResult // mifght not need
+    case noSearchString, loading, noResult, showingResult // mifght not need
 }
 
 enum RepositoryViewState{
-    case loading, showingResult
+    case loading, isEmpty, showingResult
 }

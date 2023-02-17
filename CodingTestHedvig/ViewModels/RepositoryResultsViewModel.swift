@@ -21,13 +21,17 @@ import SwiftUI
             self.viewState = RepositoryViewState.loading
             let searchResult = try await APIService.shared.loadRepositoryData(url: url)
             
-            for theResult in searchResult{
-                guard let imageUrl = theResult.owner?.avatarUrl else { return }
-                let image = try await APIService.shared.downloadImage(urlString: imageUrl)
-                
-                self.repositoryDetail.append(RepositoryDetailModel(repositoryTitle: theResult.name ?? "", repositoryDescription: theResult.description ?? "", repositoryOwner: theResult.owner?.login ?? "", ownerImage: image ?? UIImage(), watchers: theResult.watchers ?? 0))
+            if searchResult.isEmpty{
+                self.viewState = RepositoryViewState.isEmpty
+            } else {
+                for theResult in searchResult{
+                    guard let imageUrl = theResult.owner?.avatarUrl else { return }
+                    let image = try await APIService.shared.downloadImage(urlString: imageUrl)
+                    
+                    self.repositoryDetail.append(RepositoryDetailModel(repositoryTitle: theResult.name ?? "", repositoryDescription: theResult.description ?? "", repositoryOwner: theResult.owner?.login ?? "", ownerImage: image ?? UIImage(), watchers: theResult.watchers ?? 0))
+                }
+                self.viewState = RepositoryViewState.showingResult
             }
-            self.viewState = RepositoryViewState.showingResult
         }
     }
     

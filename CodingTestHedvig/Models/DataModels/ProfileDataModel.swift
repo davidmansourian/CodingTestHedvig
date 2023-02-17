@@ -17,7 +17,6 @@ struct ProfileDataModel: Decodable{
         case incompleteResults = "incomplete_results"
         case items
     }
-
 }
 
 struct Items: Decodable{

@@ -40,21 +40,23 @@ import SwiftUI
         Task{
             self.viewState = SearchResultViewState.loading
             let searchResult = try await APIService.shared.loadProfiles(url: url)
-            var counter = 1
-            
-            for theResult in searchResult.items{
-                if counter >= 21{
-                    break
+            if searchResult.totalCount == 0{
+                self.viewState = SearchResultViewState.noResult
+            } else {
+                var counter = 1
+                for theResult in searchResult.items{
+                    if counter >= 21{
+                        break
+                    }
+                    let imageUrl = theResult.avatarUrl
+                    let image = try await APIService.shared.downloadImage(urlString: imageUrl)
+                    
+                    self.profileResults.append(ProfileDetailModel(profileUsername: theResult.login, profileAccountType: theResult.type, profileReposUrl: theResult.reposUrl, profileImage: image ?? UIImage()))
+                    
+                    counter += 1
                 }
-                
-                let imageUrl = theResult.avatarUrl
-                let image = try await APIService.shared.downloadImage(urlString: imageUrl)
-                
-                self.profileResults.append(ProfileDetailModel(profileUsername: theResult.login, profileAccountType: theResult.type, profileReposUrl: theResult.reposUrl, profileImage: image ?? UIImage()))
-                
-                counter += 1
+                self.viewState = SearchResultViewState.showingResult
             }
-            self.viewState = SearchResultViewState.showingResult
         }
     }
     

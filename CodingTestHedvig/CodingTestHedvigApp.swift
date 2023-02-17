@@ -11,7 +11,7 @@ import SwiftUI
 struct CodingTestHedvigApp: App {
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            ProfileSearchView()
         }
     }
 }

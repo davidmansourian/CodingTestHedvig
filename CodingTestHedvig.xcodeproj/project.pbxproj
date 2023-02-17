@@ -10,7 +10,7 @@
 		DB369064299E306700B76091 /* CodingTestHedvigApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB369063299E306700B76091 /* CodingTestHedvigApp.swift */; };
 		DB369068299E306800B76091 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB369067299E306800B76091 /* Assets.xcassets */; };
 		DB36906B299E306800B76091 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB36906A299E306800B76091 /* Preview Assets.xcassets */; };
-		DB369075299E30CC00B76091 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB369074299E30CC00B76091 /* HomeView.swift */; };
+		DB369075299E30CC00B76091 /* ProfileSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB369074299E30CC00B76091 /* ProfileSearchView.swift */; };
 		DB369078299E37BA00B76091 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB369077299E37BA00B76091 /* APIService.swift */; };
 		DB36907A299E3DCF00B76091 /* RepositoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB369079299E3DCF00B76091 /* RepositoryDataModel.swift */; };
 		DB36907C299E408300B76091 /* APIStringModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB36907B299E408300B76091 /* APIStringModel.swift */; };
@@ -35,6 +35,8 @@
 		DB3690B3299F7CA300B76091 /* ProfileUsernameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690B2299F7CA300B76091 /* ProfileUsernameView.swift */; };
 		DB3690B5299F7D0900B76091 /* ChevronIconViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690B4299F7D0900B76091 /* ChevronIconViews.swift */; };
 		DB3690B7299F7D4200B76091 /* ProfileTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690B6299F7D4200B76091 /* ProfileTypeView.swift */; };
+		DB3690BF299F828000B76091 /* NoResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690BE299F828000B76091 /* NoResultView.swift */; };
+		DB3690C1299F84C800B76091 /* NoRepositoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690C0299F84C800B76091 /* NoRepositoriesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +44,7 @@
 		DB369063299E306700B76091 /* CodingTestHedvigApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodingTestHedvigApp.swift; sourceTree = "<group>"; };
 		DB369067299E306800B76091 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB36906A299E306800B76091 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		DB369074299E30CC00B76091 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		DB369074299E30CC00B76091 /* ProfileSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSearchView.swift; sourceTree = "<group>"; };
 		DB369077299E37BA00B76091 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		DB369079299E3DCF00B76091 /* RepositoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDataModel.swift; sourceTree = "<group>"; };
 		DB36907B299E408300B76091 /* APIStringModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStringModel.swift; sourceTree = "<group>"; };
@@ -67,6 +69,8 @@
 		DB3690B2299F7CA300B76091 /* ProfileUsernameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUsernameView.swift; sourceTree = "<group>"; };
 		DB3690B4299F7D0900B76091 /* ChevronIconViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChevronIconViews.swift; sourceTree = "<group>"; };
 		DB3690B6299F7D4200B76091 /* ProfileTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTypeView.swift; sourceTree = "<group>"; };
+		DB3690BE299F828000B76091 /* NoResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResultView.swift; sourceTree = "<group>"; };
+		DB3690C0299F84C800B76091 /* NoRepositoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoRepositoriesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +125,7 @@
 		DB369071299E309B00B76091 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DB3690B8299F7DA900B76091 /* MainViews */,
+				DB3690B8299F7DA900B76091 /* StaticViews */,
 				DB369096299ED1A000B76091 /* Reusables */,
 				DB369095299ED0FA00B76091 /* ProfileCardView */,
 				DB36908A299ECDFC00B76091 /* RepositoryCardView */,
@@ -202,12 +206,14 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
-		DB3690B8299F7DA900B76091 /* MainViews */ = {
+		DB3690B8299F7DA900B76091 /* StaticViews */ = {
 			isa = PBXGroup;
 			children = (
 				DB3690A0299ED61400B76091 /* SearchInstructionView.swift */,
+				DB3690BE299F828000B76091 /* NoResultView.swift */,
+				DB3690C0299F84C800B76091 /* NoRepositoriesView.swift */,
 			);
-			path = MainViews;
+			path = StaticViews;
 			sourceTree = "<group>";
 		};
 		DB3690B9299F7F4800B76091 /* MainView */ = {
@@ -235,7 +241,7 @@
 		DB3690BB299F7F7400B76091 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
-				DB369074299E30CC00B76091 /* HomeView.swift */,
+				DB369074299E30CC00B76091 /* ProfileSearchView.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -328,10 +334,11 @@
 				DB36907C299E408300B76091 /* APIStringModel.swift in Sources */,
 				DB369094299ECEFC00B76091 /* ViewRepositoryButtonView.swift in Sources */,
 				DB369092299ECE6600B76091 /* RepositoryOwnerView.swift in Sources */,
-				DB369075299E30CC00B76091 /* HomeView.swift in Sources */,
+				DB369075299E30CC00B76091 /* ProfileSearchView.swift in Sources */,
 				DB369099299ED1B900B76091 /* LoadingIndicatorView.swift in Sources */,
 				DB369080299E6BF100B76091 /* RepositoryCardView.swift in Sources */,
 				DB369078299E37BA00B76091 /* APIService.swift in Sources */,
+				DB3690C1299F84C800B76091 /* NoRepositoriesView.swift in Sources */,
 				DB3690AB299EF24700B76091 /* RepositoryListView.swift in Sources */,
 				DB369082299E6D8400B76091 /* RepositoryDetailModel.swift in Sources */,
 				DB3690A7299EE2C400B76091 /* ProfileCardView.swift in Sources */,
@@ -343,6 +350,7 @@
 				DB3690A1299ED61400B76091 /* SearchInstructionView.swift in Sources */,
 				DB3690A5299EDECB00B76091 /* ProfileDetailModel.swift in Sources */,
 				DB369090299ECE5C00B76091 /* RepositoryProfileAvatarView.swift in Sources */,
+				DB3690BF299F828000B76091 /* NoResultView.swift in Sources */,
 				DB3690B7299F7D4200B76091 /* ProfileTypeView.swift in Sources */,
 				DB3690A3299EDD8800B76091 /* ProfileResultsViewModel.swift in Sources */,
 				DB369084299E6DE300B76091 /* RepositoryResultsViewModel.swift in Sources */,
