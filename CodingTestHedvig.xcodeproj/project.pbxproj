@@ -158,13 +158,8 @@
 		DB36908A299ECDFC00B76091 /* RepositoryCardView */ = {
 			isa = PBXGroup;
 			children = (
-				DB36907F299E6BF100B76091 /* RepositoryCardView.swift */,
-				DB36908B299ECE4500B76091 /* RepositoryTitleView.swift */,
-				DB36908D299ECE4E00B76091 /* RepositoryDescriptionView.swift */,
-				DB36908F299ECE5C00B76091 /* RepositoryProfileAvatarView.swift */,
-				DB369091299ECE6600B76091 /* RepositoryOwnerView.swift */,
-				DB369093299ECEFC00B76091 /* ViewRepositoryButtonView.swift */,
-				DB3690AE299F7B5F00B76091 /* RepositoryWatchersView.swift */,
+				DB3690B9299F7F4800B76091 /* MainView */,
+				DB3690BA299F7F5500B76091 /* Compartments */,
 			);
 			path = RepositoryCardView;
 			sourceTree = "<group>";
@@ -172,10 +167,8 @@
 		DB369095299ED0FA00B76091 /* ProfileCardView */ = {
 			isa = PBXGroup;
 			children = (
-				DB3690A6299EE2C400B76091 /* ProfileCardView.swift */,
-				DB3690B0299F7C6100B76091 /* ProfileAvatarView.swift */,
-				DB3690B2299F7CA300B76091 /* ProfileUsernameView.swift */,
-				DB3690B6299F7D4200B76091 /* ProfileTypeView.swift */,
+				DB3690BB299F7F7400B76091 /* MainView */,
+				DB3690BC299F7F7900B76091 /* Compartments */,
 			);
 			path = ProfileCardView;
 			sourceTree = "<group>";
@@ -213,10 +206,49 @@
 			isa = PBXGroup;
 			children = (
 				DB3690A0299ED61400B76091 /* SearchInstructionView.swift */,
-				DB3690AA299EF24700B76091 /* RepositoryListView.swift */,
-				DB369074299E30CC00B76091 /* HomeView.swift */,
 			);
 			path = MainViews;
+			sourceTree = "<group>";
+		};
+		DB3690B9299F7F4800B76091 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				DB3690AA299EF24700B76091 /* RepositoryListView.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		DB3690BA299F7F5500B76091 /* Compartments */ = {
+			isa = PBXGroup;
+			children = (
+				DB36907F299E6BF100B76091 /* RepositoryCardView.swift */,
+				DB36908B299ECE4500B76091 /* RepositoryTitleView.swift */,
+				DB36908D299ECE4E00B76091 /* RepositoryDescriptionView.swift */,
+				DB36908F299ECE5C00B76091 /* RepositoryProfileAvatarView.swift */,
+				DB369091299ECE6600B76091 /* RepositoryOwnerView.swift */,
+				DB369093299ECEFC00B76091 /* ViewRepositoryButtonView.swift */,
+				DB3690AE299F7B5F00B76091 /* RepositoryWatchersView.swift */,
+			);
+			path = Compartments;
+			sourceTree = "<group>";
+		};
+		DB3690BB299F7F7400B76091 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				DB369074299E30CC00B76091 /* HomeView.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		DB3690BC299F7F7900B76091 /* Compartments */ = {
+			isa = PBXGroup;
+			children = (
+				DB3690A6299EE2C400B76091 /* ProfileCardView.swift */,
+				DB3690B0299F7C6100B76091 /* ProfileAvatarView.swift */,
+				DB3690B2299F7CA300B76091 /* ProfileUsernameView.swift */,
+				DB3690B6299F7D4200B76091 /* ProfileTypeView.swift */,
+			);
+			path = Compartments;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -11,6 +11,7 @@ import SwiftUI
 @MainActor class RepositoryResultsViewModel: ObservableObject{
     @Published var repositoryDetail: [RepositoryDetailModel] = []
     @Published var viewState = RepositoryViewState.loading
+    @Published var pickedProfile: String = ""
     
     
     

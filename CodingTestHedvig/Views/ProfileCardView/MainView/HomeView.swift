@@ -32,6 +32,7 @@ struct HomeView: View{
                                 }
                                 .simultaneousGesture(TapGesture().onEnded({
                                     repositoryVm.fillRepositoryDataModel(url: theResult.profileReposUrl)
+                                    repositoryVm.pickedProfile = theResult.profileUsername
                                 }))
                                 .tint(Color.black)
 

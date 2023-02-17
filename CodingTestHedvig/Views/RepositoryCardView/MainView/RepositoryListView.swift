@@ -36,6 +36,8 @@ struct RepositoryListView: View {
                     }
                 }
             }
+            .navigationTitle(repositoryResultsVm.pickedProfile)
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

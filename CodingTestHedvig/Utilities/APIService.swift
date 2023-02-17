@@ -27,8 +27,6 @@ class APIService{
     // Perhaps this is more efficient in selecting the desired profile
     // When searching for "david", there are several profiles that pops up.
     
-
-    
    private init(){}
     
     
