@@ -33,7 +33,7 @@ struct ProfileCardView: View {
                     
                     Spacer()
                     
-                    ChevronRightView()
+                  ChevronRightView()
                 }
                 .padding(.top, 3)
             }

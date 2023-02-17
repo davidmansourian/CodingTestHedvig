@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum SearchType: String{
+enum APICallState: String{
     case userSearch = "/users?q="
 }

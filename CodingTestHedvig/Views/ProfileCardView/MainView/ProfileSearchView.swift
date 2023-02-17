@@ -19,36 +19,48 @@ struct ProfileSearchView: View{
                         switch profileResultsVm.viewState{
                         case .noSearchString:
                             SearchInstructionView()
-                                .offset(y: 200)
+                                .offset(y: 50)
                                 .navigationTitle("Git Finder")
                                 .navigationBarTitleDisplayMode(.large)
                         case .loading:
                             LoadingIndicatorView()
-                                .offset(y: 50)
+                              .offset(y: 50)
                         case .noResult:
                             NoResultView()
-                                .offset(y: 200)
+                               .offset(y: 50)
                         case .showingResult:
                             ForEach(profileResultsVm.profileResults){ theResult in
-                                NavigationLink {
+                                NavigationLink(destination: RepositoryListView(repositoryResultsVm: repositoryVm)){
+                                    ProfileCardView(profileResultsVm: profileResultsVm, image: theResult.profileImage, username: theResult.profileUsername, type: theResult.profileAccountType)
+                                }
+                                .animation(.default, value: profileResultsVm.searchString)
+                                .tint(.primary)
+                                .simultaneousGesture(TapGesture().onEnded({
+                                    repositoryVm.currentURL = theResult.profileReposUrl
+                                    repositoryVm.pageNumber = 1 // resetting page number
+                                    repositoryVm.fillRepositoryDataModel(url: repositoryVm.repoURLPageBuilder(URLString: theResult.profileReposUrl, pageNumber: repositoryVm.pageNumber, perPageNumber: repositoryVm.resultsPerPage))
+                                    repositoryVm.pickedProfile = theResult.profileUsername
+                                }))
+                                
+                               /* NavigationLink {
                                    RepositoryListView(repositoryResultsVm: repositoryVm)
                                 } label: {
                                     ProfileCardView(profileResultsVm: profileResultsVm, image: theResult.profileImage, username: theResult.profileUsername, type: theResult.profileAccountType)
                                 }
                                 .simultaneousGesture(TapGesture().onEnded({
-                                    repositoryVm.fillRepositoryDataModel(url: theResult.profileReposUrl)
+                                    repositoryVm.currentURL = theResult.profileReposUrl
+                                    repositoryVm.pageNumber = 1 // resetting page number
+                                    repositoryVm.fillRepositoryDataModel(url: repositoryVm.repoURLPageBuilder(URLString: theResult.profileReposUrl, pageNumber: repositoryVm.pageNumber, perPageNumber: repositoryVm.resultsPerPage))
                                     repositoryVm.pickedProfile = theResult.profileUsername
-                                }))
-                                .tint(Color.black)
+                                }))*/
 
                                 
-                                Divider()
+                              Divider()
                                 
                             }
-                            .animation(.default, value: profileResultsVm.searchString)
                         }
                     }
-                }
+               }
             }
             .searchable(text: $profileResultsVm.searchString).autocorrectionDisabled()
             .scrollDismissesKeyboard(.immediately)

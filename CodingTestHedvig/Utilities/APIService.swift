@@ -14,7 +14,7 @@ class APIService{
     @Published var fetchedRepositories: [Welcome3Element]?
     @Published var fetchedProfiles: [ProfileDataModel]?
     private var jsonDecoder = JSONDecoder()
-    private var searchType = SearchType.userSearch
+    private var searchType = APICallState.userSearch
     
     // https://api.github.com/search/users?q=davidmansourian
     
@@ -29,7 +29,6 @@ class APIService{
     
    private init(){}
     
-    
     func loadProfiles(url: String) async throws -> ProfileDataModel{
         guard let urlString = URL(string: url) else { throw URLError(.badURL) }
         var searchResults: ProfileDataModel
@@ -40,7 +39,7 @@ class APIService{
         } catch{
             throw error
         }
-        print(searchResults)
+        //print(searchResults)
         return searchResults
     }
     
@@ -54,7 +53,7 @@ class APIService{
         } catch {
             throw error
         }
-        print(searchResults)
+        //print(searchResults)
         return searchResults
     }
     

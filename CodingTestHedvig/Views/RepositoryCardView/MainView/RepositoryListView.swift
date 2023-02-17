@@ -16,35 +16,69 @@ struct RepositoryListView: View {
     
     var body: some View {
         ZStack {
-            Color.white // Change color
-                .edgesIgnoringSafeArea(.all)
             NavigationStack{
-                ScrollView(.vertical, showsIndicators: true){
                     VStack{
                         switch repositoryResultsVm.viewState{
                         case .loading:
                             LoadingIndicatorView()
-                                .offset(y:50)
+                              //  .offset(y:50)
                         case .isEmpty:
                             NoRepositoriesView()
-                                .offset(y: 200)
+                              //  .offset(y: 200)
                         case .showingResult:
-                            ForEach(repositoryResultsVm.repositoryDetail){ theResult in
-                                RepositoryCardView(searchResultVm: repositoryResultsVm, image: theResult.ownerImage, title: theResult.repositoryTitle, description: theResult.repositoryDescription, owner: theResult.repositoryOwner, watchers: theResult.watchers)
+                            List{
+                                ForEach(repositoryResultsVm.repositoryDetail){ theResult in
+                                    RepositoryCardView(searchResultVm: repositoryResultsVm, image: theResult.ownerImage, title: theResult.repositoryTitle, description: theResult.repositoryDescription, owner: theResult.repositoryOwner, watchers: theResult.watchers)
+                                }
+                                switch repositoryResultsVm.scrollLoadingState{
+                                case .idle:
+                                    Color.clear
+                                        .frame(width: 100, height: 100)
+                                        .onAppear{
+                                            repositoryResultsVm.paginateRepositoryData(URLString: repositoryResultsVm.currentURL)
+                                        }
+                                case .loading:
+                                    LoadingIndicatorView()
+                                        .frame(maxWidth: .infinity)
+                                    
+                                case .finished:
+                                    EmptyView()
+                                }
                                 
-                                Divider()
+                              /*  switch repositoryResultsVm.scrollLoadingState{
+                                case .idle:
+                                    Color.clear
+                                        .frame(width: 100, height: 100)
+                                        .onAppear{
+                                            print("im idle")
+                                        }
+                                case .loading:
+                                    HStack{
+                                        Spacer()
+                                        LoadingIndicatorView()
+                                        Spacer()
+                                    }
+                                    .onAppear{
+                                        repositoryResultsVm.paginateRepositoryData(URLString: repositoryResultsVm.currentURL)
+                                        print("im loading")
+                                    }
+                                case .finished:
+                                    Color.clear
+                                        .frame(width: 0, height: 0)
+                                }*/
                             }
+                            .listStyle(.inset)
+
                         }
                         
                     }
-                }
             }
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     RepositoryToolbarSortMenu(repositoryResultsVm: repositoryResultsVm)
                 }
             }
-            .navigationTitle(repositoryResultsVm.pickedProfile)
+            .navigationTitle("\(repositoryResultsVm.pickedProfile) - \(repositoryResultsVm.totalRepositories) related repos")
             .navigationBarTitleDisplayMode(.inline)
         }
     }
