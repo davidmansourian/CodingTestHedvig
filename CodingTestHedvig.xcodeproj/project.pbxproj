@@ -142,7 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				DB36909B299ED2EA00B76091 /* Enums */,
-				DB36909A299ED2D700B76091 /* Data Models */,
+				DB36909A299ED2D700B76091 /* DataModels */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -189,7 +189,7 @@
 			path = Reusables;
 			sourceTree = "<group>";
 		};
-		DB36909A299ED2D700B76091 /* Data Models */ = {
+		DB36909A299ED2D700B76091 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
 				DB369088299ECB0900B76091 /* ProfileDataModel.swift */,
@@ -197,7 +197,7 @@
 				DB369079299E3DCF00B76091 /* RepositoryDataModel.swift */,
 				DB3690A4299EDECB00B76091 /* ProfileDetailModel.swift */,
 			);
-			path = "Data Models";
+			path = DataModels;
 			sourceTree = "<group>";
 		};
 		DB36909B299ED2EA00B76091 /* Enums */ = {
