@@ -59,6 +59,7 @@
 		DB3690F729A0179800B76091 /* ContributorsDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690F629A0179800B76091 /* ContributorsDetailModel.swift */; };
 		DB3690FD29A0186300B76091 /* ContributorsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690FC29A0186300B76091 /* ContributorsDataModel.swift */; };
 		DB36910029A0198B00B76091 /* LanguagesDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690FF29A0198B00B76091 /* LanguagesDataModel.swift */; };
+		DB36910329A0415200B76091 /* SwiftUITooltip in Frameworks */ = {isa = PBXBuildFile; productRef = DB36910229A0415200B76091 /* SwiftUITooltip */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -122,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB36910329A0415200B76091 /* SwiftUITooltip in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +413,9 @@
 			dependencies = (
 			);
 			name = CodingTestHedvig;
+			packageProductDependencies = (
+				DB36910229A0415200B76091 /* SwiftUITooltip */,
+			);
 			productName = CodingTestHedvig;
 			productReference = DB369060299E306700B76091 /* CodingTestHedvig.app */;
 			productType = "com.apple.product-type.application";
@@ -439,6 +444,9 @@
 				Base,
 			);
 			mainGroup = DB369057299E306700B76091;
+			packageReferences = (
+				DB36910129A0415200B76091 /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */,
+			);
 			productRefGroup = DB369061299E306700B76091 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -715,6 +723,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DB36910129A0415200B76091 /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/quassummanus/SwiftUI-Tooltip.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DB36910229A0415200B76091 /* SwiftUITooltip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DB36910129A0415200B76091 /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */;
+			productName = SwiftUITooltip;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DB369058299E306700B76091 /* Project object */;
 }
