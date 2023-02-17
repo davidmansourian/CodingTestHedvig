@@ -17,7 +17,7 @@ struct RepositoryOwnerView: View {
     }
     var body: some View {
         Text("owned by \(owner)")
-            .font(.callout)
+            .font(.footnote)
             .fontWeight(.thin)
             .padding(.bottom, 3)
     }
