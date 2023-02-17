@@ -21,6 +21,6 @@ struct ProfileAvatarView: View {
             .aspectRatio(contentMode: .fit)
             .frame(height: 30)
             .clipShape(Circle())
-            .padding(.bottom, 3)
+            //.padding(.bottom, 3)
     }
 }

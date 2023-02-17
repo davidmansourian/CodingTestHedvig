@@ -8,11 +8,21 @@
 import SwiftUI
 
 struct ViewRepositoryButtonView: View {
+    @StateObject var pickedRepositoryVm = PickedRepositoryViewModel()
+    
+    
     var body: some View {
-        Button {
-            //
-        } label: {
-            Text("View Repository")
+        HStack{
+            Button {
+                pickedRepositoryVm.showingRepository.toggle()
+            } label: {
+                Text("View Repository")
+                    .font(.subheadline)
+                    .foregroundColor(.blue)
+            }
+            .sheet(isPresented: $pickedRepositoryVm.showingRepository, onDismiss: pickedRepositoryVm.didDismiss) {
+                SingleRepositoryView()
+            }
         }
     }
 }

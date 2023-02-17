@@ -37,7 +37,7 @@ struct ProfileCardView: View {
                     
                   ChevronRightView()
                 }
-                .padding(.top, 3)
+                //.padding(.top, 3)
             }
             .padding(.horizontal)
         }

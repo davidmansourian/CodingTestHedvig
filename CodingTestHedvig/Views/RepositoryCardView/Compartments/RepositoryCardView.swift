@@ -54,7 +54,7 @@ struct RepositoryCardView: View {
             
             HStack{
                 if owner != repositoryResultsVm.pickedProfile{
-                    Text("\(repositoryResultsVm.pickedProfile) contributed to this")
+                    Text("\(repositoryResultsVm.pickedProfile) is a contributor")
                         .foregroundColor(.blue)
                         .font(.caption2)
                         .fontWeight(.light)

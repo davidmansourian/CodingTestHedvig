@@ -19,6 +19,6 @@ struct ProfileUsernameView: View {
         Text(username)
             .font(.subheadline)
             .fontWeight(.semibold)
-            .padding(.bottom, 3)
+            //.padding(.bottom, 3)
     }
 }
