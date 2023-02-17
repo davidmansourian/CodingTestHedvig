@@ -7,24 +7,61 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 @MainActor class RepositoryResultsViewModel: ObservableObject{
     @Published var repositoryDetail: [RepositoryDetailModel] = []
+    @Published var filteredRepositoryDetail: [RepositoryDetailModel] = []
+    
     @Published var viewState = RepositoryViewState.loading
     @Published var scrollLoadingState: InfinityScrollState = .idle
+    @Published var filterBarState: RepositoryFilterBarState = .all
+    
+    @Published var currentURL: String = ""
     @Published var pickedProfile: String = ""
+    
     @Published var totalRepositories: Int = 0
     @Published var pageNumber: Int = 1
     @Published var resultsPerPage: Int = 20
-    @Published var currentURL: String = ""
+    
+    private var cancellables = Set<AnyCancellable>()
     
     
+    init(){
+        $filterBarState
+            .sink { completion in
+                switch completion{
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("DEBUG: FilterBarStatus Error (Combine) \(error)")
+                }
+            } receiveValue: { [weak self] filterState in
+                switch filterState{
+                case .all:
+                    break
+                case .owner:
+                    print("im owner")
+                    self?.filteredRepositoryDetail = self?.repositoryDetail.filter{$0.repositoryOwner.contains(self?.pickedProfile ?? "")} ?? []
+                    self?.viewState = .showingResult
+                case .contributor:
+                    print("im contributor")
+                    self?.filteredRepositoryDetail = self?.repositoryDetail.filter{!$0.repositoryOwner.contains(self?.pickedProfile ?? "")} ?? []
+                    self?.viewState = .showingResult
+                }
+            }
+            .store(in: &cancellables)
+    }
     
     
     func repoURLPageBuilder(URLString: String, pageNumber: Int, perPageNumber: Int) -> String{
         var components = URLComponents(string: URLString)
         
-        components?.queryItems = [URLQueryItem(name: "page", value: String(pageNumber)),
+        // ?type=all&sort=updated&affiliation=collaborator&page=2&per_page=100
+        
+        components?.queryItems = [URLQueryItem(name: "type", value: "all"),
+                                  URLQueryItem(name: "affiliation", value: "collaborator"),
+                                  URLQueryItem(name: "page", value: String(pageNumber)),
                                   URLQueryItem(name: "per_page", value: String(perPageNumber))
         ]
         
@@ -58,7 +95,7 @@ import SwiftUI
                 self.scrollLoadingState = .idle
                 print(self.repositoryDetail.count)
             }
-        
+            
         }
         
     }
@@ -66,7 +103,7 @@ import SwiftUI
     
     func fillRepositoryDataModel(url: String){
         Task{
-           // paginateRepositoryData(URLString: url)
+            // paginateRepositoryData(URLString: url)
             repositoryDetail.removeAll()
             self.viewState = RepositoryViewState.loading
             let searchResult = try await APIService.shared.loadRepositoryData(url: url)
@@ -93,21 +130,37 @@ import SwiftUI
         switch action{
         case .watchersDescending:
             repositoryDetail.sort{$0.watchers > $1.watchers}
-            self.viewState = RepositoryViewState.showingResult
+            self.viewState = .showingResult
         case .watchersAscending:
             repositoryDetail.sort{$0.watchers < $1.watchers}
-            self.viewState = RepositoryViewState.showingResult
+            self.viewState = .showingResult
         case .createdNewest:
             repositoryDetail.sort{$0.createdAt > $1.createdAt}
-            self.viewState = RepositoryViewState.showingResult
+            self.viewState = .showingResult
         case .createdOldest:
             repositoryDetail.sort{$0.createdAt < $1.createdAt}
-            self.viewState = RepositoryViewState.showingResult
+            self.viewState = .showingResult
         case .lastUpdated:
             repositoryDetail.sort{$0.updatedAt > $1.updatedAt}
-            self.viewState = RepositoryViewState.showingResult
+            self.viewState = .showingResult
         case .noAction:
-            self.viewState = RepositoryViewState.showingResult
+            self.viewState = .showingResult
+        }
+    }
+    
+    func filterRepositories(action: RepositoryFilterBarState){
+        self.viewState = .loading
+        switch action{
+        case .all:
+            print("Hej")
+        case .owner:
+            filteredRepositoryDetail.removeAll()
+            filteredRepositoryDetail.append(contentsOf: repositoryDetail.filter{$0.repositoryOwner.contains(self.pickedProfile)})
+            self.viewState = .showingResult
+        case .contributor:
+            filteredRepositoryDetail.removeAll()
+            filteredRepositoryDetail.append(contentsOf: repositoryDetail.filter{!$0.repositoryOwner.contains(self.pickedProfile)})
+            self.viewState = .showingResult
         }
     }
     

@@ -33,17 +33,11 @@ struct ProfileCardView: View {
                     
                     Spacer()
                     
+                    ProfileTypeView(profileResultsVm: profileResultsVm, type: type)
+                    
                   ChevronRightView()
                 }
                 .padding(.top, 3)
-            }
-            .padding(.horizontal)
-            
-            HStack{
-                
-                ProfileTypeView(profileResultsVm: profileResultsVm, type: type)
-                
-                Spacer()
             }
             .padding(.horizontal)
         }

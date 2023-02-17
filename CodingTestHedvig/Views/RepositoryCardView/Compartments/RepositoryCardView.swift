@@ -44,11 +44,21 @@ struct RepositoryCardView: View {
             HStack{
                 RepositoryProfileAvatarView(searchResultVm: repositoryResultsVm, image: image)
                 
-                RepositoryOwnerView(searchResultVm: repositoryResultsVm, owner: owner)
-                
+                    RepositoryOwnerView(searchResultVm: repositoryResultsVm, owner: owner)
+                    
                 Spacer()
                 
                 RepositoryWatchersView(searchResultVm: repositoryResultsVm, watchers: watchers)
+            }
+            .padding(.horizontal)
+            
+            HStack{
+                if owner != repositoryResultsVm.pickedProfile{
+                    Text("\(repositoryResultsVm.pickedProfile) contributed to this")
+                        .foregroundColor(.blue)
+                        .font(.caption2)
+                        .fontWeight(.light)
+                }
             }
             .padding(.horizontal)
         }

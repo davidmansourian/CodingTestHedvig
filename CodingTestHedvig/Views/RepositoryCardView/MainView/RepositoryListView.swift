@@ -18,58 +18,9 @@ struct RepositoryListView: View {
         ZStack {
             NavigationStack{
                     VStack{
-                        switch repositoryResultsVm.viewState{
-                        case .loading:
-                            LoadingIndicatorView()
-                              //  .offset(y:50)
-                        case .isEmpty:
-                            NoRepositoriesView()
-                              //  .offset(y: 200)
-                        case .showingResult:
-                            List{
-                                ForEach(repositoryResultsVm.repositoryDetail){ theResult in
-                                    RepositoryCardView(searchResultVm: repositoryResultsVm, image: theResult.ownerImage, title: theResult.repositoryTitle, description: theResult.repositoryDescription, owner: theResult.repositoryOwner, watchers: theResult.watchers)
-                                }
-                                switch repositoryResultsVm.scrollLoadingState{
-                                case .idle:
-                                    Color.clear
-                                        .frame(width: 100, height: 100)
-                                        .onAppear{
-                                            repositoryResultsVm.paginateRepositoryData(URLString: repositoryResultsVm.currentURL)
-                                        }
-                                case .loading:
-                                    LoadingIndicatorView()
-                                        .frame(maxWidth: .infinity)
-                                    
-                                case .finished:
-                                    EmptyView()
-                                }
-                                
-                              /*  switch repositoryResultsVm.scrollLoadingState{
-                                case .idle:
-                                    Color.clear
-                                        .frame(width: 100, height: 100)
-                                        .onAppear{
-                                            print("im idle")
-                                        }
-                                case .loading:
-                                    HStack{
-                                        Spacer()
-                                        LoadingIndicatorView()
-                                        Spacer()
-                                    }
-                                    .onAppear{
-                                        repositoryResultsVm.paginateRepositoryData(URLString: repositoryResultsVm.currentURL)
-                                        print("im loading")
-                                    }
-                                case .finished:
-                                    Color.clear
-                                        .frame(width: 0, height: 0)
-                                }*/
-                            }
-                            .listStyle(.inset)
-
-                        }
+                        FilterBarView(repositoryResultsVm: repositoryResultsVm)
+                        
+                        RepositoryListStateView(repositoryResultsVm: repositoryResultsVm)
                         
                     }
             }

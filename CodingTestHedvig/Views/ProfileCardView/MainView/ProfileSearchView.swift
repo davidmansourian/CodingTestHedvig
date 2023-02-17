@@ -41,20 +41,6 @@ struct ProfileSearchView: View{
                                     repositoryVm.fillRepositoryDataModel(url: repositoryVm.repoURLPageBuilder(URLString: theResult.profileReposUrl, pageNumber: repositoryVm.pageNumber, perPageNumber: repositoryVm.resultsPerPage))
                                     repositoryVm.pickedProfile = theResult.profileUsername
                                 }))
-                                
-                               /* NavigationLink {
-                                   RepositoryListView(repositoryResultsVm: repositoryVm)
-                                } label: {
-                                    ProfileCardView(profileResultsVm: profileResultsVm, image: theResult.profileImage, username: theResult.profileUsername, type: theResult.profileAccountType)
-                                }
-                                .simultaneousGesture(TapGesture().onEnded({
-                                    repositoryVm.currentURL = theResult.profileReposUrl
-                                    repositoryVm.pageNumber = 1 // resetting page number
-                                    repositoryVm.fillRepositoryDataModel(url: repositoryVm.repoURLPageBuilder(URLString: theResult.profileReposUrl, pageNumber: repositoryVm.pageNumber, perPageNumber: repositoryVm.resultsPerPage))
-                                    repositoryVm.pickedProfile = theResult.profileUsername
-                                }))*/
-
-                                
                               Divider()
                                 
                             }

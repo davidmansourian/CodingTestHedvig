@@ -17,7 +17,7 @@ struct ProfileTypeView: View {
     }
     var body: some View {
         Text(type)
-            .font(.body)
+            .font(.subheadline)
             .fontWeight(.ultraLight)
     }
 }
