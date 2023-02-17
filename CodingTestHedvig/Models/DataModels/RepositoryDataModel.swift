@@ -33,6 +33,8 @@ struct Welcome3Element: Decodable{
     let hasWiki: Bool?
     let issueCount: Int?
     let watchers: Int?
+    let createdAt: String
+    let updatedAt: String
     
     
     enum CodingKeys: String, CodingKey {
@@ -48,6 +50,8 @@ struct Welcome3Element: Decodable{
         case hasWiki = "has_wiki"
         case issueCount = "open_issues_count"
         case watchers
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
         
     
     }

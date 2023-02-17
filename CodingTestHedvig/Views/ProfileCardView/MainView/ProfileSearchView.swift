@@ -20,6 +20,8 @@ struct ProfileSearchView: View{
                         case .noSearchString:
                             SearchInstructionView()
                                 .offset(y: 200)
+                                .navigationTitle("Git Finder")
+                                .navigationBarTitleDisplayMode(.large)
                         case .loading:
                             LoadingIndicatorView()
                                 .offset(y: 50)

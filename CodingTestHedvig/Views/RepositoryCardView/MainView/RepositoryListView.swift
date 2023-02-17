@@ -39,6 +39,11 @@ struct RepositoryListView: View {
                     }
                 }
             }
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    RepositoryToolbarSortMenu(repositoryResultsVm: repositoryResultsVm)
+                }
+            }
             .navigationTitle(repositoryResultsVm.pickedProfile)
             .navigationBarTitleDisplayMode(.inline)
         }

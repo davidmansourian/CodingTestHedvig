@@ -37,6 +37,8 @@
 		DB3690B7299F7D4200B76091 /* ProfileTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690B6299F7D4200B76091 /* ProfileTypeView.swift */; };
 		DB3690BF299F828000B76091 /* NoResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690BE299F828000B76091 /* NoResultView.swift */; };
 		DB3690C1299F84C800B76091 /* NoRepositoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690C0299F84C800B76091 /* NoRepositoriesView.swift */; };
+		DB3690C3299F87A600B76091 /* RepositoryToolbarSortMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690C2299F87A600B76091 /* RepositoryToolbarSortMenu.swift */; };
+		DB3690C5299F8CF800B76091 /* SortActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690C4299F8CF800B76091 /* SortActions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +73,8 @@
 		DB3690B6299F7D4200B76091 /* ProfileTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTypeView.swift; sourceTree = "<group>"; };
 		DB3690BE299F828000B76091 /* NoResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResultView.swift; sourceTree = "<group>"; };
 		DB3690C0299F84C800B76091 /* NoRepositoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoRepositoriesView.swift; sourceTree = "<group>"; };
+		DB3690C2299F87A600B76091 /* RepositoryToolbarSortMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryToolbarSortMenu.swift; sourceTree = "<group>"; };
+		DB3690C4299F8CF800B76091 /* SortActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortActions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +206,7 @@
 			children = (
 				DB36907B299E408300B76091 /* APIStringModel.swift */,
 				DB3690AC299EF32000B76091 /* ViewStates.swift */,
+				DB3690C4299F8CF800B76091 /* SortActions.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -234,6 +239,7 @@
 				DB369091299ECE6600B76091 /* RepositoryOwnerView.swift */,
 				DB369093299ECEFC00B76091 /* ViewRepositoryButtonView.swift */,
 				DB3690AE299F7B5F00B76091 /* RepositoryWatchersView.swift */,
+				DB3690C2299F87A600B76091 /* RepositoryToolbarSortMenu.swift */,
 			);
 			path = Compartments;
 			sourceTree = "<group>";
@@ -330,6 +336,7 @@
 				DB36908E299ECE4E00B76091 /* RepositoryDescriptionView.swift in Sources */,
 				DB3690B1299F7C6100B76091 /* ProfileAvatarView.swift in Sources */,
 				DB3690AF299F7B5F00B76091 /* RepositoryWatchersView.swift in Sources */,
+				DB3690C5299F8CF800B76091 /* SortActions.swift in Sources */,
 				DB369089299ECB0900B76091 /* ProfileDataModel.swift in Sources */,
 				DB36907C299E408300B76091 /* APIStringModel.swift in Sources */,
 				DB369094299ECEFC00B76091 /* ViewRepositoryButtonView.swift in Sources */,
@@ -352,6 +359,7 @@
 				DB369090299ECE5C00B76091 /* RepositoryProfileAvatarView.swift in Sources */,
 				DB3690BF299F828000B76091 /* NoResultView.swift in Sources */,
 				DB3690B7299F7D4200B76091 /* ProfileTypeView.swift in Sources */,
+				DB3690C3299F87A600B76091 /* RepositoryToolbarSortMenu.swift in Sources */,
 				DB3690A3299EDD8800B76091 /* ProfileResultsViewModel.swift in Sources */,
 				DB369084299E6DE300B76091 /* RepositoryResultsViewModel.swift in Sources */,
 				DB36908C299ECE4500B76091 /* RepositoryTitleView.swift in Sources */,

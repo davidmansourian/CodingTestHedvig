@@ -15,4 +15,6 @@ struct RepositoryDetailModel: Identifiable{
     let repositoryOwner: String
     let ownerImage: UIImage
     let watchers: Int
+    let createdAt: String
+    let updatedAt: String
 }

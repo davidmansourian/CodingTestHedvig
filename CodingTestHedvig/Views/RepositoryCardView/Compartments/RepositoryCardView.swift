@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RepositoryCardView: View {
-    @StateObject var searchResultVm: RepositoryResultsViewModel
+    @StateObject var repositoryResultsVm: RepositoryResultsViewModel
     @State var image = UIImage()
     @State var title: String
     @State var description: String
@@ -16,7 +16,7 @@ struct RepositoryCardView: View {
     @State var watchers: Int
     
     init(searchResultVm: RepositoryResultsViewModel, image: UIImage, title: String, description: String, owner: String, watchers: Int){
-        _searchResultVm = StateObject(wrappedValue: searchResultVm)
+        _repositoryResultsVm = StateObject(wrappedValue: searchResultVm)
         _image = State(wrappedValue: image)
         _title = State(wrappedValue: title)
         _description = State(wrappedValue: description)
@@ -29,7 +29,7 @@ struct RepositoryCardView: View {
             VStack(alignment: .leading, spacing: 4){
                 
                 HStack(spacing: 20){
-                    RepositoryTitleView(searchResultVm: searchResultVm, title: title)
+                    RepositoryTitleView(searchResultVm: repositoryResultsVm, title: title)
                     
                     Spacer()
                     
@@ -37,18 +37,18 @@ struct RepositoryCardView: View {
                 }
                // .padding(.top, 3)
                 
-                RepositoryDescriptionView(searchResultVm: searchResultVm, description: description)
+                RepositoryDescriptionView(searchResultVm: repositoryResultsVm, description: description)
             }
             .padding(.horizontal)
             
             HStack{
-                RepositoryProfileAvatarView(searchResultVm: searchResultVm, image: image)
+                RepositoryProfileAvatarView(searchResultVm: repositoryResultsVm, image: image)
                 
-                RepositoryOwnerView(searchResultVm: searchResultVm, owner: owner)
+                RepositoryOwnerView(searchResultVm: repositoryResultsVm, owner: owner)
                 
                 Spacer()
                 
-                RepositoryWatchersView(searchResultVm: searchResultVm, watchers: watchers)
+                RepositoryWatchersView(searchResultVm: repositoryResultsVm, watchers: watchers)
             }
             .padding(.horizontal)
         }
