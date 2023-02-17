@@ -56,6 +56,9 @@
 		DB3690F129A015D300B76091 /* SingleRepositoryReadmeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690F029A015D300B76091 /* SingleRepositoryReadmeView.swift */; };
 		DB3690F329A0160100B76091 /* SingleRepositoryLanguagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690F229A0160100B76091 /* SingleRepositoryLanguagesView.swift */; };
 		DB3690F529A0163C00B76091 /* SingleRepositoryContributorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690F429A0163C00B76091 /* SingleRepositoryContributorsView.swift */; };
+		DB3690F729A0179800B76091 /* ContributorsDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690F629A0179800B76091 /* ContributorsDetailModel.swift */; };
+		DB3690FD29A0186300B76091 /* ContributorsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690FC29A0186300B76091 /* ContributorsDataModel.swift */; };
+		DB36910029A0198B00B76091 /* LanguagesDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690FF29A0198B00B76091 /* LanguagesDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,6 +112,9 @@
 		DB3690F029A015D300B76091 /* SingleRepositoryReadmeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRepositoryReadmeView.swift; sourceTree = "<group>"; };
 		DB3690F229A0160100B76091 /* SingleRepositoryLanguagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRepositoryLanguagesView.swift; sourceTree = "<group>"; };
 		DB3690F429A0163C00B76091 /* SingleRepositoryContributorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRepositoryContributorsView.swift; sourceTree = "<group>"; };
+		DB3690F629A0179800B76091 /* ContributorsDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributorsDetailModel.swift; sourceTree = "<group>"; };
+		DB3690FC29A0186300B76091 /* ContributorsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributorsDataModel.swift; sourceTree = "<group>"; };
+		DB3690FF29A0198B00B76091 /* LanguagesDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesDataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,10 +235,10 @@
 		DB36909A299ED2D700B76091 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
-				DB369088299ECB0900B76091 /* ProfileDataModel.swift */,
-				DB369081299E6D8400B76091 /* RepositoryDetailModel.swift */,
-				DB369079299E3DCF00B76091 /* RepositoryDataModel.swift */,
-				DB3690A4299EDECB00B76091 /* ProfileDetailModel.swift */,
+				DB3690FE29A018A800B76091 /* Languages */,
+				DB3690FA29A017CF00B76091 /* Contributors */,
+				DB3690F929A017CB00B76091 /* Repositories */,
+				DB3690F829A017BF00B76091 /* UserProfiles */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -354,6 +360,41 @@
 			path = Repository;
 			sourceTree = "<group>";
 		};
+		DB3690F829A017BF00B76091 /* UserProfiles */ = {
+			isa = PBXGroup;
+			children = (
+				DB369088299ECB0900B76091 /* ProfileDataModel.swift */,
+				DB3690A4299EDECB00B76091 /* ProfileDetailModel.swift */,
+			);
+			path = UserProfiles;
+			sourceTree = "<group>";
+		};
+		DB3690F929A017CB00B76091 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				DB369081299E6D8400B76091 /* RepositoryDetailModel.swift */,
+				DB369079299E3DCF00B76091 /* RepositoryDataModel.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		DB3690FA29A017CF00B76091 /* Contributors */ = {
+			isa = PBXGroup;
+			children = (
+				DB3690F629A0179800B76091 /* ContributorsDetailModel.swift */,
+				DB3690FC29A0186300B76091 /* ContributorsDataModel.swift */,
+			);
+			path = Contributors;
+			sourceTree = "<group>";
+		};
+		DB3690FE29A018A800B76091 /* Languages */ = {
+			isa = PBXGroup;
+			children = (
+				DB3690FF29A0198B00B76091 /* LanguagesDataModel.swift */,
+			);
+			path = Languages;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -440,6 +481,7 @@
 				DB3690E929A0142700B76091 /* SingleRepositoryOwnerView.swift in Sources */,
 				DB369094299ECEFC00B76091 /* ViewRepositoryButtonView.swift in Sources */,
 				DB369092299ECE6600B76091 /* RepositoryOwnerView.swift in Sources */,
+				DB3690FD29A0186300B76091 /* ContributorsDataModel.swift in Sources */,
 				DB369075299E30CC00B76091 /* ProfileSearchView.swift in Sources */,
 				DB369099299ED1B900B76091 /* LoadingIndicatorView.swift in Sources */,
 				DB3690CA299FDBEE00B76091 /* FilterBarState.swift in Sources */,
@@ -458,10 +500,12 @@
 				DB3690F129A015D300B76091 /* SingleRepositoryReadmeView.swift in Sources */,
 				DB369064299E306700B76091 /* CodingTestHedvigApp.swift in Sources */,
 				DB3690B3299F7CA300B76091 /* ProfileUsernameView.swift in Sources */,
+				DB3690F729A0179800B76091 /* ContributorsDetailModel.swift in Sources */,
 				DB36907A299E3DCF00B76091 /* RepositoryDataModel.swift in Sources */,
 				DB3690B5299F7D0900B76091 /* ChevronIconViews.swift in Sources */,
 				DB3690ED29A0152D00B76091 /* SingleRepositoryDescriptionView.swift in Sources */,
 				DB3690A1299ED61400B76091 /* SearchInstructionView.swift in Sources */,
+				DB36910029A0198B00B76091 /* LanguagesDataModel.swift in Sources */,
 				DB3690A5299EDECB00B76091 /* ProfileDetailModel.swift in Sources */,
 				DB3690DE299FF41300B76091 /* SingleRepositoryView.swift in Sources */,
 				DB369090299ECE5C00B76091 /* RepositoryProfileAvatarView.swift in Sources */,

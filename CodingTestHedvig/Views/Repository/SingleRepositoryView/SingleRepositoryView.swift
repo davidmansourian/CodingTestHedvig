@@ -74,10 +74,10 @@ struct SingleRepositoryView: View {
             .frame(maxWidth: .infinity)
 
             
-            VStack(spacing: 20){
+           /* VStack(spacing: 20){
                 SingleRepositoryTextStatsView(repositoryResultsVm: repositoryResultsVm, title: title)
             }
-            .padding()
+            .padding()*/
             
             Spacer()
             
