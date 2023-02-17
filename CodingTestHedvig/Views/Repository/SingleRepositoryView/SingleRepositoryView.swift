@@ -62,7 +62,7 @@ struct SingleRepositoryView: View {
                 }
                 
                 VStack{
-                    SingleRepositoryLanguagesView(repositoryResultsVm: repositoryResultsVm, title: title)
+                    SingleRepositoryLanguagesView(repositoryResultsVm: repositoryResultsVm, languagesUrl: languagesUrl)
                 }
                 
                 VStack{

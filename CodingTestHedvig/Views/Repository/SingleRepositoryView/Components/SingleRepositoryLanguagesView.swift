@@ -9,11 +9,11 @@ import SwiftUI
 
 struct SingleRepositoryLanguagesView: View {
     @StateObject var repositoryResultsVm: RepositoryResultsViewModel
-    @State var title: String
+    @State var languagesUrl: String
     
-    init(repositoryResultsVm: RepositoryResultsViewModel, title: String){
+    init(repositoryResultsVm: RepositoryResultsViewModel, languagesUrl: String){
         _repositoryResultsVm = StateObject(wrappedValue: repositoryResultsVm)
-        _title = State(wrappedValue: title)
+        _languagesUrl = State(wrappedValue: languagesUrl)
     }
     var body: some View {
         HStack{
@@ -22,12 +22,17 @@ struct SingleRepositoryLanguagesView: View {
                 .fontWeight(.light)
                 .padding(.top)
         }
-        
+        .onAppear{
+            repositoryResultsVm.loadRepoLanguages(URLString: languagesUrl)
+           // repositoryResultsVm.calculateLanguagePercentages()
+        }
         HStack{
-            Color(.systemPurple)
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 15)
-                .clipShape(Circle())
+            ForEach(repositoryResultsVm.repoLanguages){ language in
+                Color(UIColor(language.color))
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 15)
+                    .clipShape(Circle())
+            }
         }
     }
 }

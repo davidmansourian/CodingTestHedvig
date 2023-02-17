@@ -12,6 +12,8 @@ import Combine
 @MainActor class RepositoryResultsViewModel: ObservableObject{
     @Published var repositoryDetail: [RepositoryDetailModel] = []
     @Published var filteredRepositoryDetail: [RepositoryDetailModel] = []
+    @Published var hexColorCodes: HexColorCodes?
+    @Published var repoLanguages: [RepoLanguage] = []
     
     @Published var viewState = RepositoryViewState.loading
     @Published var scrollLoadingState: InfinityScrollState = .idle
@@ -23,6 +25,7 @@ import Combine
     @Published var totalRepositories: Int = 0
     @Published var pageNumber: Int = 1
     @Published var resultsPerPage: Int = 20
+    @Published var totalLanguagesValue: Int = 0
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -162,6 +165,50 @@ import Combine
             filteredRepositoryDetail.append(contentsOf: repositoryDetail.filter{!$0.repositoryOwner.contains(self.pickedProfile)})
             self.viewState = .showingResult
         }
+    }
+    
+    
+    
+    func loadRepoLanguages(URLString: String){
+        Task{
+            self.loadColorCodes()
+            self.repoLanguages.removeAll()
+            self.totalLanguagesValue = 0
+            let languages = try await APIService.shared.loadRepoLanguages(url: URLString)
+            let languageKeys = Set(self.hexColorCodes?.keys.map { String($0) } ?? [])
+            for language in languages{
+                if let hexColorCode = self.hexColorCodes?[language.key], languageKeys.contains(language.key){
+                    self.repoLanguages.append(RepoLanguage(language: language.key, color: Color(hex: hexColorCode) ?? .purple, value: language.value, percentage: nil))
+                    self.totalLanguagesValue += language.value
+                }
+            }
+            
+            for var language in self.repoLanguages{
+                language.percentage = ((Double(language.value) / Double(self.totalLanguagesValue))*100)
+                let roundedNumber = String(format: "%.2f", language.percentage!)
+                print("\(language.language): \(roundedNumber)%")
+            }
+        }
+    }
+    
+    
+    func loadColorCodes(){
+        guard let path = Bundle.main.path(forResource: "GitLangColors", ofType: "json") else {
+            print("error path")
+            return
+        }
+        do {
+            let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+            let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+            if let colorsArray = json as? HexColorCodes {
+                let colorsDict = colorsArray
+                self.hexColorCodes = colorsDict
+              //  print(self.hexColorCodes?.first)
+            }
+        } catch{
+            print(error)
+        }
+        
     }
     
 }

@@ -57,6 +57,21 @@ class APIService{
         return searchResults
     }
     
+    func loadRepoLanguages(url: String) async throws -> RepoLanguages{
+        guard let urlString = URL(string: url) else { throw URLError(.badURL) }
+        var languageDict: RepoLanguages?
+        
+        do{
+            let (data, _) = try await URLSession.shared.data(from: urlString)
+            languageDict = try JSONDecoder().decode(RepoLanguages.self, from: data)
+            
+        } catch {
+            throw error
+        }
+        //print(searchResults)
+        return languageDict ?? RepoLanguages()
+    }
+    
     
     
     func handleImageResponse(data: Data?, response: URLResponse?) -> UIImage? {
