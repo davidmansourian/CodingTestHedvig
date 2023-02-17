@@ -17,12 +17,12 @@ struct RepositoryListView: View {
     var body: some View {
         ZStack {
             NavigationStack{
-                    VStack{
-                        FilterBarView(repositoryResultsVm: repositoryResultsVm)
-                        
-                        RepositoryListStateView(repositoryResultsVm: repositoryResultsVm)
-                        
-                    }
+                VStack{
+                    FilterBarView(repositoryResultsVm: repositoryResultsVm)
+                    
+                    RepositoryListStateView(repositoryResultsVm: repositoryResultsVm)
+                    
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {

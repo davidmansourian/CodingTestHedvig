@@ -17,10 +17,8 @@ struct RepositoryListStateView: View {
         switch repositoryResultsVm.viewState{
         case .loading:
             LoadingIndicatorView()
-              //  .offset(y:50)
         case .isEmpty:
             NoRepositoriesView()
-              //  .offset(y: 200)
         case .showingResult:
             List{
                 RepositoryFilterStateView(repositoryResultsVm: repositoryResultsVm)
@@ -28,8 +26,8 @@ struct RepositoryListStateView: View {
                 RepositoryScrollLoadingStateView(repositoryResultsVm: repositoryResultsVm)
             }
             .listStyle(.inset)
-
+            
         }
-
+        
     }
 }

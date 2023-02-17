@@ -14,14 +14,15 @@ struct RepositoryFilterStateView: View {
         _repositoryResultsVm = StateObject(wrappedValue: repositoryResultsVm)
     }
     var body: some View {
-        if repositoryResultsVm.filterBarState == .owner || repositoryResultsVm.filterBarState == .contributor{
+        
+        repositoryResultsVm.filterBarState == .owner || repositoryResultsVm.filterBarState == .contributor ?
+        
             ForEach(repositoryResultsVm.filteredRepositoryDetail){ theResult in
-                RepositoryCardView(searchResultVm: repositoryResultsVm, image: theResult.ownerImage, title: theResult.repositoryTitle, description: theResult.repositoryDescription, owner: theResult.repositoryOwner, watchers: theResult.watchers)
-            }
-        } else {
+                RepositoryCardView(searchResultVm: repositoryResultsVm, image: theResult.ownerImage, title: theResult.repositoryTitle, description: theResult.repositoryDescription, owner: theResult.repositoryOwner, watchers: theResult.watchers)}
+        
+        :
+        
             ForEach(repositoryResultsVm.repositoryDetail){ theResult in
-                RepositoryCardView(searchResultVm: repositoryResultsVm, image: theResult.ownerImage, title: theResult.repositoryTitle, description: theResult.repositoryDescription, owner: theResult.repositoryOwner, watchers: theResult.watchers)
-            }
-        }
+                RepositoryCardView(searchResultVm: repositoryResultsVm, image: theResult.ownerImage, title: theResult.repositoryTitle, description: theResult.repositoryDescription, owner: theResult.repositoryOwner, watchers: theResult.watchers)}
     }
 }

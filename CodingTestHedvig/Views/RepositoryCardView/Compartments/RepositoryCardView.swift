@@ -39,7 +39,7 @@ struct RepositoryCardView: View {
                 
                 RepositoryDescriptionView(searchResultVm: repositoryResultsVm, description: description)
             }
-            .padding(.horizontal)
+           // .padding(.horizontal)
             
             HStack{
                 RepositoryProfileAvatarView(searchResultVm: repositoryResultsVm, image: image)
@@ -50,7 +50,7 @@ struct RepositoryCardView: View {
                 
                 RepositoryWatchersView(searchResultVm: repositoryResultsVm, watchers: watchers)
             }
-            .padding(.horizontal)
+          //  .padding(.horizontal)
             
             HStack{
                 if owner != repositoryResultsVm.pickedProfile{
@@ -60,7 +60,7 @@ struct RepositoryCardView: View {
                         .fontWeight(.light)
                 }
             }
-            .padding(.horizontal)
+          //  .padding(.horizontal)
         }
         
     }
