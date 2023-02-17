@@ -48,6 +48,14 @@
 		DB3690DB299FF36B00B76091 /* PickedRepositoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690DA299FF36B00B76091 /* PickedRepositoryViewModel.swift */; };
 		DB3690DE299FF41300B76091 /* SingleRepositoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690DD299FF41300B76091 /* SingleRepositoryView.swift */; };
 		DB3690E1299FF92300B76091 /* GitLangColors.json in Resources */ = {isa = PBXBuildFile; fileRef = DB3690E0299FF92300B76091 /* GitLangColors.json */; };
+		DB3690E629A00E9400B76091 /* SingleRepositoryTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690E529A00E9400B76091 /* SingleRepositoryTitleView.swift */; };
+		DB3690E929A0142700B76091 /* SingleRepositoryOwnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690E829A0142700B76091 /* SingleRepositoryOwnerView.swift */; };
+		DB3690EB29A0147B00B76091 /* SingleRepositoryStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690EA29A0147B00B76091 /* SingleRepositoryStatsView.swift */; };
+		DB3690ED29A0152D00B76091 /* SingleRepositoryDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690EC29A0152D00B76091 /* SingleRepositoryDescriptionView.swift */; };
+		DB3690EF29A0159700B76091 /* SingleRepositoryTextStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690EE29A0159700B76091 /* SingleRepositoryTextStatsView.swift */; };
+		DB3690F129A015D300B76091 /* SingleRepositoryReadmeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690F029A015D300B76091 /* SingleRepositoryReadmeView.swift */; };
+		DB3690F329A0160100B76091 /* SingleRepositoryLanguagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690F229A0160100B76091 /* SingleRepositoryLanguagesView.swift */; };
+		DB3690F529A0163C00B76091 /* SingleRepositoryContributorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3690F429A0163C00B76091 /* SingleRepositoryContributorsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +101,14 @@
 		DB3690DA299FF36B00B76091 /* PickedRepositoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickedRepositoryViewModel.swift; sourceTree = "<group>"; };
 		DB3690DD299FF41300B76091 /* SingleRepositoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRepositoryView.swift; sourceTree = "<group>"; };
 		DB3690E0299FF92300B76091 /* GitLangColors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GitLangColors.json; sourceTree = "<group>"; };
+		DB3690E529A00E9400B76091 /* SingleRepositoryTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRepositoryTitleView.swift; sourceTree = "<group>"; };
+		DB3690E829A0142700B76091 /* SingleRepositoryOwnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRepositoryOwnerView.swift; sourceTree = "<group>"; };
+		DB3690EA29A0147B00B76091 /* SingleRepositoryStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRepositoryStatsView.swift; sourceTree = "<group>"; };
+		DB3690EC29A0152D00B76091 /* SingleRepositoryDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRepositoryDescriptionView.swift; sourceTree = "<group>"; };
+		DB3690EE29A0159700B76091 /* SingleRepositoryTextStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRepositoryTextStatsView.swift; sourceTree = "<group>"; };
+		DB3690F029A015D300B76091 /* SingleRepositoryReadmeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRepositoryReadmeView.swift; sourceTree = "<group>"; };
+		DB3690F229A0160100B76091 /* SingleRepositoryLanguagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRepositoryLanguagesView.swift; sourceTree = "<group>"; };
+		DB3690F429A0163C00B76091 /* SingleRepositoryContributorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRepositoryContributorsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,11 +164,10 @@
 		DB369071299E309B00B76091 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DB3690DC299FF40500B76091 /* SingleRepositoryView */,
+				DB3690E729A0137700B76091 /* Repository */,
 				DB3690B8299F7DA900B76091 /* StaticViews */,
 				DB369096299ED1A000B76091 /* Reusables */,
 				DB369095299ED0FA00B76091 /* ProfileCardView */,
-				DB36908A299ECDFC00B76091 /* RepositoryCardView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -302,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				DB3690DD299FF41300B76091 /* SingleRepositoryView.swift */,
+				DB3690E229A00E5D00B76091 /* Components */,
 			);
 			path = SingleRepositoryView;
 			sourceTree = "<group>";
@@ -312,6 +328,30 @@
 				DB3690E0299FF92300B76091 /* GitLangColors.json */,
 			);
 			path = Misc;
+			sourceTree = "<group>";
+		};
+		DB3690E229A00E5D00B76091 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				DB3690E529A00E9400B76091 /* SingleRepositoryTitleView.swift */,
+				DB3690E829A0142700B76091 /* SingleRepositoryOwnerView.swift */,
+				DB3690EC29A0152D00B76091 /* SingleRepositoryDescriptionView.swift */,
+				DB3690EA29A0147B00B76091 /* SingleRepositoryStatsView.swift */,
+				DB3690F429A0163C00B76091 /* SingleRepositoryContributorsView.swift */,
+				DB3690F229A0160100B76091 /* SingleRepositoryLanguagesView.swift */,
+				DB3690F029A015D300B76091 /* SingleRepositoryReadmeView.swift */,
+				DB3690EE29A0159700B76091 /* SingleRepositoryTextStatsView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		DB3690E729A0137700B76091 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				DB3690DC299FF40500B76091 /* SingleRepositoryView */,
+				DB36908A299ECDFC00B76091 /* RepositoryCardView */,
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -386,7 +426,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB36908E299ECE4E00B76091 /* RepositoryDescriptionView.swift in Sources */,
+				DB3690F329A0160100B76091 /* SingleRepositoryLanguagesView.swift in Sources */,
 				DB3690B1299F7C6100B76091 /* ProfileAvatarView.swift in Sources */,
+				DB3690E629A00E9400B76091 /* SingleRepositoryTitleView.swift in Sources */,
 				DB3690AF299F7B5F00B76091 /* RepositoryWatchersView.swift in Sources */,
 				DB3690C5299F8CF800B76091 /* SortActions.swift in Sources */,
 				DB369089299ECB0900B76091 /* ProfileDataModel.swift in Sources */,
@@ -394,11 +436,14 @@
 				DB3690C7299FAD1500B76091 /* InfinityScrollState.swift in Sources */,
 				DB3690CC299FDC5E00B76091 /* FilterBarView.swift in Sources */,
 				DB3690DB299FF36B00B76091 /* PickedRepositoryViewModel.swift in Sources */,
+				DB3690EB29A0147B00B76091 /* SingleRepositoryStatsView.swift in Sources */,
+				DB3690E929A0142700B76091 /* SingleRepositoryOwnerView.swift in Sources */,
 				DB369094299ECEFC00B76091 /* ViewRepositoryButtonView.swift in Sources */,
 				DB369092299ECE6600B76091 /* RepositoryOwnerView.swift in Sources */,
 				DB369075299E30CC00B76091 /* ProfileSearchView.swift in Sources */,
 				DB369099299ED1B900B76091 /* LoadingIndicatorView.swift in Sources */,
 				DB3690CA299FDBEE00B76091 /* FilterBarState.swift in Sources */,
+				DB3690F529A0163C00B76091 /* SingleRepositoryContributorsView.swift in Sources */,
 				DB369080299E6BF100B76091 /* RepositoryCardView.swift in Sources */,
 				DB369078299E37BA00B76091 /* APIService.swift in Sources */,
 				DB3690C1299F84C800B76091 /* NoRepositoriesView.swift in Sources */,
@@ -409,10 +454,13 @@
 				DB369082299E6D8400B76091 /* RepositoryDetailModel.swift in Sources */,
 				DB3690A7299EE2C400B76091 /* ProfileCardView.swift in Sources */,
 				DB3690AD299EF32000B76091 /* ViewStates.swift in Sources */,
+				DB3690EF29A0159700B76091 /* SingleRepositoryTextStatsView.swift in Sources */,
+				DB3690F129A015D300B76091 /* SingleRepositoryReadmeView.swift in Sources */,
 				DB369064299E306700B76091 /* CodingTestHedvigApp.swift in Sources */,
 				DB3690B3299F7CA300B76091 /* ProfileUsernameView.swift in Sources */,
 				DB36907A299E3DCF00B76091 /* RepositoryDataModel.swift in Sources */,
 				DB3690B5299F7D0900B76091 /* ChevronIconViews.swift in Sources */,
+				DB3690ED29A0152D00B76091 /* SingleRepositoryDescriptionView.swift in Sources */,
 				DB3690A1299ED61400B76091 /* SearchInstructionView.swift in Sources */,
 				DB3690A5299EDECB00B76091 /* ProfileDetailModel.swift in Sources */,
 				DB3690DE299FF41300B76091 /* SingleRepositoryView.swift in Sources */,

@@ -17,4 +17,9 @@ struct RepositoryDetailModel: Identifiable{
     let watchers: Int
     let createdAt: String
     let updatedAt: String
+    let forks: Int
+    let stars: Int
+    let contributorsUrl: String
+    let languagesUrl: String
+    let activeIssues: Int
 }

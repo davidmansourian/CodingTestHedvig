@@ -35,6 +35,10 @@ struct Welcome3Element: Decodable{
     let watchers: Int?
     let createdAt: String
     let updatedAt: String
+    let openIssues: Int
+    let starredCount: Int
+    let forksCount: Int
+    let languagesUrl: String
     
     
     enum CodingKeys: String, CodingKey {
@@ -52,6 +56,10 @@ struct Welcome3Element: Decodable{
         case watchers
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case openIssues = "open_issues"
+        case starredCount = "stargazers_count"
+        case forksCount = "forks_count"
+        case languagesUrl = "languages_url"
         
     
     }
