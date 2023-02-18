@@ -29,6 +29,7 @@ import Combine
     @Published var pageNumber: Int = 1
     @Published var resultsPerPage: Int = 20
     @Published var totalLanguagesValue: Int = 0
+    @Published var totalContriubutors: Int = 0
     
     @Published var showingRepository: Bool = false
     @Published var hasReadme: Bool = true
@@ -136,15 +137,14 @@ import Combine
     func loadContributors(URLString: String){
         Task{
             repoContributors.removeAll()
-            self.viewState = .loading
             let loadedContributors = try await APIService.shared.loadContributors(url: URLString)
+            self.totalContriubutors = loadedContributors.count
             for contributor in loadedContributors{
                 let imageUrl = contributor.avatarURL
                 let image = try await APIService.shared.downloadImage(urlString: imageUrl)
                 
                 self.repoContributors.append(ContributorDataModel(username: contributor.login, image: image ?? UIImage(), contributions: contributor.contributions))
             }
-            self.viewState = .showingResult
         }
     }
     

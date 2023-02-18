@@ -8,7 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct ContributorDataModel{
+struct ContributorDataModel: Identifiable{
+    let id = UUID()
     let username: String
     let image: UIImage
     let contributions: Int

@@ -61,6 +61,8 @@
 		DB36910B29A1068E00B76091 /* SafariViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB36910A29A1068E00B76091 /* SafariViewWrapper.swift */; };
 		DB36910E29A108CC00B76091 /* ReadmeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB36910D29A108CC00B76091 /* ReadmeDataModel.swift */; };
 		DB36911029A1090D00B76091 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB36910F29A1090D00B76091 /* ColorExtension.swift */; };
+		DB36911329A127D100B76091 /* ContributorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB36911229A127D100B76091 /* ContributorsView.swift */; };
+		DB36911629A1288900B76091 /* ContributorRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB36911529A1288900B76091 /* ContributorRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -119,6 +121,8 @@
 		DB36910A29A1068E00B76091 /* SafariViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariViewWrapper.swift; sourceTree = "<group>"; };
 		DB36910D29A108CC00B76091 /* ReadmeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadmeDataModel.swift; sourceTree = "<group>"; };
 		DB36910F29A1090D00B76091 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		DB36911229A127D100B76091 /* ContributorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributorsView.swift; sourceTree = "<group>"; };
+		DB36911529A1288900B76091 /* ContributorRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributorRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -413,8 +417,18 @@
 		DB36911129A11D2900B76091 /* Contributors */ = {
 			isa = PBXGroup;
 			children = (
+				DB36911229A127D100B76091 /* ContributorsView.swift */,
+				DB36911429A1287600B76091 /* Compartments */,
 			);
 			path = Contributors;
+			sourceTree = "<group>";
+		};
+		DB36911429A1287600B76091 /* Compartments */ = {
+			isa = PBXGroup;
+			children = (
+				DB36911529A1288900B76091 /* ContributorRowView.swift */,
+			);
+			path = Compartments;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -518,6 +532,7 @@
 				DB369078299E37BA00B76091 /* APIService.swift in Sources */,
 				DB3690C1299F84C800B76091 /* NoRepositoriesView.swift in Sources */,
 				DB3690D0299FE0E900B76091 /* RepositoryFilterStateView.swift in Sources */,
+				DB36911329A127D100B76091 /* ContributorsView.swift in Sources */,
 				DB3690CE299FE06800B76091 /* RepositoryListStateView.swift in Sources */,
 				DB3690D3299FE52600B76091 /* RepositoryScrollLoadingStateView.swift in Sources */,
 				DB3690AB299EF24700B76091 /* RepositoryListView.swift in Sources */,
@@ -530,6 +545,7 @@
 				DB3690F729A0179800B76091 /* ContributorsDetailModel.swift in Sources */,
 				DB36907A299E3DCF00B76091 /* RepositoryDataModel.swift in Sources */,
 				DB3690B5299F7D0900B76091 /* ChevronIconViews.swift in Sources */,
+				DB36911629A1288900B76091 /* ContributorRowView.swift in Sources */,
 				DB3690ED29A0152D00B76091 /* SingleRepositoryDescriptionView.swift in Sources */,
 				DB3690A1299ED61400B76091 /* SearchInstructionView.swift in Sources */,
 				DB36910029A0198B00B76091 /* LanguagesDataModel.swift in Sources */,

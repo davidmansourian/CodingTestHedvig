@@ -78,7 +78,7 @@ struct SingleRepositoryView: View {
                     
                     VStack{
                         
-                        SingleRepositoryContributorsView(repositoryResultsVm: repositoryResultsVm, title: title)
+                        SingleRepositoryContributorsView(repositoryResultsVm: repositoryResultsVm, title: title, image: image, contributorsURL: contributorsUrl)
                     }
                     
                     if repositoryResultsVm.readmeURL != nil{
@@ -96,6 +96,7 @@ struct SingleRepositoryView: View {
                 
             }
             .onAppear{
+                repositoryResultsVm.loadContributors(URLString: contributorsUrl)
                 repositoryResultsVm.findReadmeURL(username: owner, repoName: title)
             }
         }
