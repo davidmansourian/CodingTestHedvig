@@ -81,23 +81,22 @@ struct SingleRepositoryView: View {
                         SingleRepositoryContributorsView(repositoryResultsVm: repositoryResultsVm, title: title)
                     }
                     
-                    VStack{
-                        SingleRepositoryReadmeView(repositoryResultsVm: repositoryResultsVm, title: title)
+                    if repositoryResultsVm.readmeURL != nil{
+                        VStack{
+                            SingleRepositoryReadmeView(repositoryResultsVm: repositoryResultsVm, owner: owner, title: title)
+                        }
+                        .offset(y: 1)
                     }
-                    .offset(y: 1)
                     
                     
                 }
                 .frame(maxWidth: .infinity)
                 
-                
-                /* VStack(spacing: 20){
-                 SingleRepositoryTextStatsView(repositoryResultsVm: repositoryResultsVm, title: title)
-                 }
-                 .padding()*/
-                
                 Spacer()
                 
+            }
+            .onAppear{
+                repositoryResultsVm.findReadmeURL(username: owner, repoName: title)
             }
         }
     }

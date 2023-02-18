@@ -9,26 +9,41 @@ import SwiftUI
 
 struct SingleRepositoryReadmeView: View {
     @StateObject var repositoryResultsVm: RepositoryResultsViewModel
+    @State var owner: String
     @State var title: String
+    @State private var showSafari: Bool = false
     
-    init(repositoryResultsVm: RepositoryResultsViewModel, title: String){
+    init(repositoryResultsVm: RepositoryResultsViewModel, owner: String, title: String){
         _repositoryResultsVm = StateObject(wrappedValue: repositoryResultsVm)
+        _owner = State(wrappedValue: owner)
         _title = State(wrappedValue: title)
     }
     
     var body: some View {
-        HStack{
-            Text("README")
-                .font(.title3)
-                .fontWeight(.light)
-                .padding(.top)
+        Button {
+                showSafari.toggle()
+        } label: {
+            VStack{
+                HStack{
+                    Text("README")
+                        .font(.title3)
+                        .fontWeight(.light)
+                        .padding(.top)
+                }
+                
+                HStack{
+                    Image(systemName: "doc")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 30)
+                }
+            }
+            .foregroundColor(.blue)
         }
-        
-        HStack{
-            Image(systemName: "doc")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 30)
-        }
+        .padding()
+        .buttonStyle(.plain)
+        .fullScreenCover(isPresented: $showSafari, content: {
+            SFSafariViewWrapper(url: (URL(string: repositoryResultsVm.readmeURL ?? "") ?? URL(string: ""))!)
+        })
     }
 }

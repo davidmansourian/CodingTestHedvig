@@ -22,6 +22,7 @@ import Combine
     
     @Published var currentURL: String = ""
     @Published var pickedProfile: String = ""
+    @Published var readmeURL: String?
     
     @Published var totalRepositories: Int = 0
     @Published var pageNumber: Int = 1
@@ -29,6 +30,7 @@ import Combine
     @Published var totalLanguagesValue: Int = 0
     
     @Published var showingRepository: Bool = false
+    @Published var hasReadme: Bool = true
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -220,6 +222,21 @@ import Combine
             }
         } catch{
             print(error)
+        }
+        
+    }
+    
+ // https://api.github.com/repos/apple/swift/readme
+    
+    func findReadmeURL(username: String, repoName: String){
+        Task{
+            let urlString = "https://api.github.com/repos/\(username)/\(repoName)/readme"
+            let theReadmeURL = try await APIService.shared.getReadmeURL(url: urlString)
+            if theReadmeURL == "Not Found"{
+                self.readmeURL = nil
+            } else {
+                self.readmeURL = theReadmeURL
+            }
         }
         
     }

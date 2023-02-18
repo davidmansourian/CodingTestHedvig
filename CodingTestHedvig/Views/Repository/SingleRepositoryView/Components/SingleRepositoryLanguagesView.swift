@@ -33,7 +33,7 @@ struct SingleRepositoryLanguagesView: View {
         .padding()
         .onAppear(){
             repositoryResultsVm.loadRepoLanguages(URLString: languagesUrl)
-            print("array is \(String(describing: repositoryResultsVm.repoLanguages))")
+           // print("array is \(String(describing: repositoryResultsVm.repoLanguages))")
             // repositoryResultsVm.calculateLanguagePercentages()
         }
         .frame(height: 350)

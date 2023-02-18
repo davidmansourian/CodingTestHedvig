@@ -18,7 +18,11 @@ struct RepositoryListView: View {
         ZStack {
             NavigationStack{
                 VStack{
-                    FilterBarView(repositoryResultsVm: repositoryResultsVm)
+                    if repositoryResultsVm.viewState == .showingResult{
+                        withAnimation{
+                            FilterBarView(repositoryResultsVm: repositoryResultsVm)
+                        }
+                    }
                     
                     RepositoryListStateView(repositoryResultsVm: repositoryResultsVm)
                     

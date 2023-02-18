@@ -17,16 +17,7 @@ class APIService{
     private var searchType = APICallState.userSearch
     
     // https://api.github.com/search/users?q=davidmansourian
-    
-    // Rules: Admit a maximum of three users from user results.
-    // Grab only repo url
-    // Show repos for admitted users
-    //
-    // Another idea is to list the top three or five git profiles and
-    // let the user pick the profile from that list
-    // Perhaps this is more efficient in selecting the desired profile
-    // When searching for "david", there are several profiles that pops up.
-    
+
    private init(){}
     
     func loadProfiles(url: String) async throws -> ProfileDataModel{
@@ -73,6 +64,28 @@ class APIService{
     }
     
     
+    
+    
+    
+    func getReadmeURL(url: String) async throws -> String{
+        guard let urlString = URL(string: url) else { throw URLError(.badURL)}
+        var readmeURL: String?
+        do{
+            let (data, response) = try await URLSession.shared.data(from: urlString)
+           // print("this is reponse: \(response)")
+            let readmeData = try JSONDecoder().decode(ReadmeDataModel.self, from: data)
+            if readmeData.message == nil{
+                readmeURL = readmeData.htmlURL
+            } else {
+                readmeURL = readmeData.message!
+            }
+        } catch {
+            throw error
+        }
+        //print(searchResults)
+        return readmeURL ?? ""
+    }
+        
     
     func handleImageResponse(data: Data?, response: URLResponse?) -> UIImage? {
         guard

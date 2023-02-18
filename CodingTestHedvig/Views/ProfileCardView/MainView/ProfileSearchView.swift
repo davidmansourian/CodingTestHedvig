@@ -36,6 +36,7 @@ struct ProfileSearchView: View{
                                 .animation(.default, value: profileResultsVm.searchString)
                                 .tint(.primary)
                                 .simultaneousGesture(TapGesture().onEnded({
+                                    repositoryVm.filterBarState = .all
                                     repositoryVm.currentURL = theResult.profileReposUrl
                                     repositoryVm.pageNumber = 1 // resetting page number
                                     repositoryVm.fillRepositoryDataModel(url: repositoryVm.repoURLPageBuilder(URLString: theResult.profileReposUrl, pageNumber: repositoryVm.pageNumber, perPageNumber: repositoryVm.resultsPerPage))

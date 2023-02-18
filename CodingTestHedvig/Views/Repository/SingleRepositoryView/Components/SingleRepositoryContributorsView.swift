@@ -16,20 +16,30 @@ struct SingleRepositoryContributorsView: View {
         _title = State(wrappedValue: title)
     }
     var body: some View {
-        HStack{
-            Text("Contributors")
-                .font(.title3)
-                .fontWeight(.light)
-                .padding(.top)
+        Button {
+            //
+        } label: {
+            VStack{
+                HStack{
+                    Text("Contributors")
+                        .font(.title3)
+                        .fontWeight(.light)
+                        .padding(.top)
+                }
+                
+                HStack{
+                    Image("avatarTest")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 30)
+                        .clipShape(Circle())
+                    
+                }
+            }
+            .foregroundColor(.blue)
+
         }
-        
-        HStack{
-            Image("avatarTest")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 30)
-                .clipShape(Circle())
-            
-        }
+        .padding()
+        .buttonStyle(.plain)
     }
 }
