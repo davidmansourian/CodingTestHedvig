@@ -25,7 +25,7 @@ struct SingleRepositoryReadmeView: View {
         } label: {
             VStack{
                 HStack{
-                    Text("README")
+                    Text("View README")
                         .font(.title3)
                         .fontWeight(.light)
                         .padding(.top)

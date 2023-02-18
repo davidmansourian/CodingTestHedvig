@@ -26,7 +26,7 @@ struct SingleRepositoryContributorsView: View {
         } label: {
             VStack{
                 HStack{
-                    Text("Contributors")
+                    Text("View Contributors")
                         .font(.title3)
                         .fontWeight(.light)
                         .padding(.top)
