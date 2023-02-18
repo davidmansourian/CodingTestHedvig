@@ -29,7 +29,7 @@ struct SingleRepositoryLanguagesView: View {
                 .annotation(position: .trailing, alignment: .center) {
                     Text("\(element.percentage ?? 0, format: .number.precision(.fractionLength(2)))%")
                         .foregroundColor(.primary)
-                        .font(.subheadline)
+                        .font(.caption2)
                 }
         }
         .padding()

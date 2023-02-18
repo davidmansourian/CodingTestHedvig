@@ -71,6 +71,9 @@
 		DB36912329A17AB300B76091 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB36912229A17AB300B76091 /* NetworkManager.swift */; };
 		DB36912529A17B4300B76091 /* ViewDelegator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB36912429A17B4300B76091 /* ViewDelegator.swift */; };
 		DB36912829A17B9D00B76091 /* OfflineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB36912729A17B9D00B76091 /* OfflineView.swift */; };
+		DB36912A29A1805600B76091 /* ContributorsViewStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB36912929A1805600B76091 /* ContributorsViewStateView.swift */; };
+		DB36912D29A1812F00B76091 /* ShimmerEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB36912C29A1812F00B76091 /* ShimmerEffectView.swift */; };
+		DB36912F29A1832800B76091 /* ContentShimmerSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB36912E29A1832700B76091 /* ContentShimmerSkeletonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,6 +142,9 @@
 		DB36912229A17AB300B76091 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		DB36912429A17B4300B76091 /* ViewDelegator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDelegator.swift; sourceTree = "<group>"; };
 		DB36912729A17B9D00B76091 /* OfflineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineView.swift; sourceTree = "<group>"; };
+		DB36912929A1805600B76091 /* ContributorsViewStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributorsViewStateView.swift; sourceTree = "<group>"; };
+		DB36912C29A1812F00B76091 /* ShimmerEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerEffectView.swift; sourceTree = "<group>"; };
+		DB36912E29A1832700B76091 /* ContentShimmerSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentShimmerSkeletonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +201,7 @@
 		DB369071299E309B00B76091 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DB36912B29A1812400B76091 /* ShimmerEffect */,
 				DB36912629A17B9100B76091 /* OfflineView */,
 				DB36911129A11D2900B76091 /* Contributors */,
 				DB3690E729A0137700B76091 /* Repository */,
@@ -440,6 +447,7 @@
 		DB36911129A11D2900B76091 /* Contributors */ = {
 			isa = PBXGroup;
 			children = (
+				DB36912929A1805600B76091 /* ContributorsViewStateView.swift */,
 				DB36911229A127D100B76091 /* ContributorsView.swift */,
 				DB36911729A140DB00B76091 /* ContributorsScrollLoadingStateView.swift */,
 				DB36911429A1287600B76091 /* Compartments */,
@@ -469,6 +477,15 @@
 				DB36912729A17B9D00B76091 /* OfflineView.swift */,
 			);
 			path = OfflineView;
+			sourceTree = "<group>";
+		};
+		DB36912B29A1812400B76091 /* ShimmerEffect */ = {
+			isa = PBXGroup;
+			children = (
+				DB36912C29A1812F00B76091 /* ShimmerEffectView.swift */,
+				DB36912E29A1832700B76091 /* ContentShimmerSkeletonView.swift */,
+			);
+			path = ShimmerEffect;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -568,6 +585,7 @@
 				DB369094299ECEFC00B76091 /* ViewRepositoryButtonView.swift in Sources */,
 				DB369092299ECE6600B76091 /* RepositoryOwnerView.swift in Sources */,
 				DB36910E29A108CC00B76091 /* ReadmeDataModel.swift in Sources */,
+				DB36912F29A1832800B76091 /* ContentShimmerSkeletonView.swift in Sources */,
 				DB3690FD29A0186300B76091 /* ContributorsDataModel.swift in Sources */,
 				DB369075299E30CC00B76091 /* ProfileSearchView.swift in Sources */,
 				DB369099299ED1B900B76091 /* LoadingIndicatorView.swift in Sources */,
@@ -579,6 +597,7 @@
 				DB3690D0299FE0E900B76091 /* RepositoryFilterStateView.swift in Sources */,
 				DB36911329A127D100B76091 /* ContributorsView.swift in Sources */,
 				DB3690CE299FE06800B76091 /* RepositoryListStateView.swift in Sources */,
+				DB36912A29A1805600B76091 /* ContributorsViewStateView.swift in Sources */,
 				DB3690D3299FE52600B76091 /* RepositoryScrollLoadingStateView.swift in Sources */,
 				DB3690AB299EF24700B76091 /* RepositoryListView.swift in Sources */,
 				DB369082299E6D8400B76091 /* RepositoryDetailModel.swift in Sources */,
@@ -586,6 +605,7 @@
 				DB3690AD299EF32000B76091 /* ViewStates.swift in Sources */,
 				DB3690F129A015D300B76091 /* SingleRepositoryReadmeView.swift in Sources */,
 				DB369064299E306700B76091 /* CodingTestHedvigApp.swift in Sources */,
+				DB36912D29A1812F00B76091 /* ShimmerEffectView.swift in Sources */,
 				DB36911F29A157DD00B76091 /* RecentProfileSearchesView.swift in Sources */,
 				DB36912529A17B4300B76091 /* ViewDelegator.swift in Sources */,
 				DB3690B3299F7CA300B76091 /* ProfileUsernameView.swift in Sources */,

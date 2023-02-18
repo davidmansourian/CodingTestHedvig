@@ -40,6 +40,7 @@ struct SingleRepositoryView: View {
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading){
+                
                 HStack{
                     SingleRepositoryTitleView(repositoryResultsVm: repositoryResultsVm, title: title)
                     

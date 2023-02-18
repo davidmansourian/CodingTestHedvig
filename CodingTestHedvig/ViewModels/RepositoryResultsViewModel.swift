@@ -21,6 +21,7 @@ import Combine
     @Published var scrollLoadingStateRepos: InfinityScrollStateRepos = .idle
     @Published var scrollLoadingStateContributors: InfinityScrollStateContributors = .idle
     @Published var filterBarState: RepositoryFilterBarState = .all
+    @Published var contributorsViewState: ContributorsViewState = .loading
     
     @Published var currentURL: String = ""
     @Published var pickedProfile: String = ""
@@ -182,6 +183,7 @@ import Combine
     
     func loadContributors(URLString: String){
         Task{
+            self.contributorsViewState = .loading
             repoContributors.removeAll()
             let loadedContributors = try await APIService.shared.loadContributors(url: URLString)
             self.totalContriubutors = loadedContributors.count
@@ -192,6 +194,8 @@ import Combine
                 
                 self.repoContributors.append(ContributorDataModel(username: contributor.login, image: image ?? UIImage(), contributions: contributor.contributions))
             }
+            
+            self.contributorsViewState = .showingResult
         }
     }
     

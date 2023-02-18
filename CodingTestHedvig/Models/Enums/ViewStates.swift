@@ -15,3 +15,7 @@ enum SearchResultViewState{
 enum RepositoryViewState{
     case loading, isEmpty, showingResult
 }
+
+enum ContributorsViewState{
+    case loading, showingResult
+}
