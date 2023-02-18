@@ -25,13 +25,15 @@ struct ContributorsView: View {
                 Divider()
                     .offset(y: -5)
                 List{
-                    ForEach(repositoryResultsVm.repoContributors){ contributor in
-                        ContributorRowView(repositoryResultsVm: repositoryResultsVm, username: contributor.username, image: contributor.image, contributions: contributor.contributions)
+                    Group{
+                        ForEach(repositoryResultsVm.repoContributors){ contributor in
+                            ContributorRowView(repositoryResultsVm: repositoryResultsVm, username: contributor.username, image: contributor.image, contributions: contributor.contributions)
+                        }
+                        
+                        ContributorsScrollLoadingStateView(repositoryResultsVm: repositoryResultsVm)
                     }
-                    
-                    ContributorsScrollLoadingStateView(repositoryResultsVm: repositoryResultsVm)
+                    .listRowSeparator(.hidden)
                 }
-                .listRowSeparator(.hidden)
                 .listStyle(.inset)
                 
             }
