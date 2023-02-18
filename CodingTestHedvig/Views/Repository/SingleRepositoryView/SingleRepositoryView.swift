@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SingleRepositoryView: View {
+    @Environment(\.dismiss) var dismiss
     @StateObject var repositoryResultsVm: RepositoryResultsViewModel
     @State var itemHovered: Bool = false
     @State var image = UIImage()
@@ -20,6 +21,7 @@ struct SingleRepositoryView: View {
     @State var contributorsUrl: String
     @State var languagesUrl: String
     @State var activeIssues: Int
+    
     
     init(repositoryResultsVm: RepositoryResultsViewModel, image: UIImage, title: String, description: String, owner: String, watchers: Int, stars: Int, forks: Int, contributorsUrl: String, languagesUrl: String, activeIssues: Int){
         _repositoryResultsVm = StateObject(wrappedValue: repositoryResultsVm)
@@ -36,51 +38,67 @@ struct SingleRepositoryView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading){
-            HStack{
-                SingleRepositoryTitleView(repositoryResultsVm: repositoryResultsVm, title: title)
-            }
-            
-            HStack{
-                SingleRepositoryOwnerView(repositoryResultsVm: repositoryResultsVm, owner: owner, image: image)
-            }
-            .offset(y: -5)
-            
-            HStack{
-                SingleRepositoryDescriptionView(repositoryResultsVm: repositoryResultsVm, description: description)
-                
-                SingleRepositoryStatsView(repositoryResultsVm: repositoryResultsVm, watchers: watchers, stars: stars, forks: forks)
-            }
-            
-            .padding(.trailing)
-            
-            HStack(alignment: .top){
-                
-                VStack{
+        NavigationStack{
+            VStack(alignment: .leading){
+                HStack{
+                    SingleRepositoryTitleView(repositoryResultsVm: repositoryResultsVm, title: title)
                     
-                    SingleRepositoryContributorsView(repositoryResultsVm: repositoryResultsVm, title: title)
+                    Spacer()
+                    
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "x.circle")
+                            .foregroundColor(.primary)
+                            .font(.title)
+                            .fontWeight(.light)
+                    }
+                    .padding(.top)
+                    .padding(.trailing)
                 }
+                
+                HStack{
+                    SingleRepositoryOwnerView(repositoryResultsVm: repositoryResultsVm, owner: owner, image: image)
+                }
+                .offset(y: -5)
+                
+                HStack{
+                    SingleRepositoryDescriptionView(repositoryResultsVm: repositoryResultsVm, description: description)
+                    
+                    SingleRepositoryStatsView(repositoryResultsVm: repositoryResultsVm, watchers: watchers, stars: stars, forks: forks)
+                }
+                
+                .padding(.trailing)
                 
                 VStack{
                     SingleRepositoryLanguagesView(repositoryResultsVm: repositoryResultsVm, languagesUrl: languagesUrl)
                 }
                 
-                VStack{
-                    SingleRepositoryReadmeView(repositoryResultsVm: repositoryResultsVm, title: title)
+                HStack(alignment: .top, spacing: 40){
+                    
+                    VStack{
+                        
+                        SingleRepositoryContributorsView(repositoryResultsVm: repositoryResultsVm, title: title)
+                    }
+                    
+                    VStack{
+                        SingleRepositoryReadmeView(repositoryResultsVm: repositoryResultsVm, title: title)
+                    }
+                    .offset(y: 1)
+                    
+                    
                 }
-
-
+                .frame(maxWidth: .infinity)
+                
+                
+                /* VStack(spacing: 20){
+                 SingleRepositoryTextStatsView(repositoryResultsVm: repositoryResultsVm, title: title)
+                 }
+                 .padding()*/
+                
+                Spacer()
+                
             }
-            .frame(maxWidth: .infinity)
-
-            
-           /* VStack(spacing: 20){
-                SingleRepositoryTextStatsView(repositoryResultsVm: repositoryResultsVm, title: title)
-            }
-            .padding()*/
-            
-            Spacer()
-            
         }
     }
 }

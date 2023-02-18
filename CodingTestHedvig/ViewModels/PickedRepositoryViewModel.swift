@@ -8,7 +8,7 @@
 import Foundation
 
 
-@MainActor class PickedRepositoryViewModel: ObservableObject{
+class PickedRepositoryViewModel: ObservableObject{
     @Published var showingRepository: Bool = false
     
     

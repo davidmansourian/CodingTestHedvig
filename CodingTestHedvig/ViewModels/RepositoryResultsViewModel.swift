@@ -13,7 +13,8 @@ import Combine
     @Published var repositoryDetail: [RepositoryDetailModel] = []
     @Published var filteredRepositoryDetail: [RepositoryDetailModel] = []
     @Published var hexColorCodes: HexColorCodes?
-    @Published var repoLanguages: [RepoLanguage] = []
+    @Published var repoLanguages: [RepoLanguage] = []
+    
     
     @Published var viewState = RepositoryViewState.loading
     @Published var scrollLoadingState: InfinityScrollState = .idle
@@ -26,6 +27,8 @@ import Combine
     @Published var pageNumber: Int = 1
     @Published var resultsPerPage: Int = 20
     @Published var totalLanguagesValue: Int = 0
+    
+    @Published var showingRepository: Bool = false
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -103,6 +106,10 @@ import Combine
         
     }
     
+    func didDismiss(){
+        self.showingRepository = false
+    }
+    
     
     func fillRepositoryDataModel(url: String){
         Task{
@@ -171,11 +178,12 @@ import Combine
     
     func loadRepoLanguages(URLString: String){
         Task{
-            self.loadColorCodes()
             self.repoLanguages.removeAll()
             self.totalLanguagesValue = 0
+            self.loadColorCodes()
             let languages = try await APIService.shared.loadRepoLanguages(url: URLString)
             let languageKeys = Set(self.hexColorCodes?.keys.map { String($0) } ?? [])
+            
             for language in languages{
                 if let hexColorCode = self.hexColorCodes?[language.key], languageKeys.contains(language.key){
                     self.repoLanguages.append(RepoLanguage(language: language.key, color: Color(hex: hexColorCode) ?? .purple, value: language.value, percentage: nil))
@@ -183,13 +191,18 @@ import Combine
                 }
             }
             
-            for var language in self.repoLanguages{
-                language.percentage = ((Double(language.value) / Double(self.totalLanguagesValue))*100)
-                let roundedNumber = String(format: "%.2f", language.percentage!)
-                print("\(language.language): \(roundedNumber)%")
+            self.repoLanguages = self.repoLanguages.map { language in
+                var languageWithPercentage = language
+                let percentage = ((Double(language.value) / Double(self.totalLanguagesValue))*100)
+                let roundedValue = round(percentage*100)/100.0
+                languageWithPercentage.percentage = roundedValue
+                print("\(languageWithPercentage.language): \(languageWithPercentage.percentage)%")
+                return languageWithPercentage
             }
         }
     }
+    
+    
     
     
     func loadColorCodes(){

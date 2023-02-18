@@ -18,7 +18,7 @@ struct SingleRepositoryContributorsView: View {
     var body: some View {
         HStack{
             Text("Contributors")
-                .font(.subheadline)
+                .font(.title3)
                 .fontWeight(.light)
                 .padding(.top)
         }
@@ -27,7 +27,7 @@ struct SingleRepositoryContributorsView: View {
             Image("avatarTest")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(height: 15)
+                .frame(height: 30)
                 .clipShape(Circle())
             
         }

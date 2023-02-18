@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Charts
 
 struct SingleRepositoryLanguagesView: View {
     @StateObject var repositoryResultsVm: RepositoryResultsViewModel
@@ -16,23 +17,32 @@ struct SingleRepositoryLanguagesView: View {
         _languagesUrl = State(wrappedValue: languagesUrl)
     }
     var body: some View {
-        HStack{
-            Text("Languages")
-                .font(.subheadline)
-                .fontWeight(.light)
-                .padding(.top)
+        Chart(repositoryResultsVm.repoLanguages){ element in
+                BarMark(
+                    x: .value("Percentage", Int(element.percentage ?? 0)),
+                    y: .value("Language", element.language )
+                )
+                .annotation(position: .trailing, alignment: .center) {
+                    Text("\(element.percentage ?? 0, format: .number.precision(.fractionLength(2)))%")
+                        .foregroundColor(.primary)
+                        .font(.subheadline)
+                }
+                .foregroundStyle(by: .value("Languages", element.language ))
         }
-        .onAppear{
+        .padding()
+        .onAppear(){
             repositoryResultsVm.loadRepoLanguages(URLString: languagesUrl)
-           // repositoryResultsVm.calculateLanguagePercentages()
+            print("array is \(String(describing: repositoryResultsVm.repoLanguages))")
+            // repositoryResultsVm.calculateLanguagePercentages()
         }
-        HStack{
-            ForEach(repositoryResultsVm.repoLanguages){ language in
-                Color(UIColor(language.color))
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 15)
-                    .clipShape(Circle())
-            }
-        }
+        .frame(height: 350)
+        .frame(maxWidth: .infinity)
+        .background(
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .fill(Color(.white))
+                .shadow(radius: 2)
+        )
+        .padding(.horizontal, 10)
+        .padding(.top, 5)
     }
 }

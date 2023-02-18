@@ -19,14 +19,16 @@ struct SingleRepositoryReadmeView: View {
     var body: some View {
         HStack{
             Text("README")
-                .font(.subheadline)
+                .font(.title3)
                 .fontWeight(.light)
                 .padding(.top)
         }
         
         HStack{
             Image(systemName: "doc")
-                .frame(height: 15)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(height: 30)
         }
     }
 }

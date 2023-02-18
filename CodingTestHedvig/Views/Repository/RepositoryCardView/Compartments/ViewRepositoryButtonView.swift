@@ -46,7 +46,7 @@ struct ViewRepositoryButtonView: View {
                     .font(.subheadline)
                     .foregroundColor(.blue)
             }
-            .sheet(isPresented: $pickedRepositoryVm.showingRepository, onDismiss: pickedRepositoryVm.didDismiss) {
+            .fullScreenCover(isPresented: $pickedRepositoryVm.showingRepository, onDismiss: pickedRepositoryVm.didDismiss) {
                 SingleRepositoryView(repositoryResultsVm: repositoryResultsVm, image: image, title: title, description: description, owner: owner, watchers: watchers, stars: stars, forks: forks, contributorsUrl: contributorsUrl, languagesUrl: languagesUrl, activeIssues: activeIssues)
             }
         }
