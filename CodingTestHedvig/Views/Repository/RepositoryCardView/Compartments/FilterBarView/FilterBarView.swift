@@ -22,7 +22,9 @@ struct FilterBarView: View {
                     Text(tab.title)
                         .font(.subheadline)
                         .fontWeight(repositoryResultsVm.filterBarState == tab ? .semibold : .regular)
-                        .foregroundColor(repositoryResultsVm.filterBarState == tab ? .black : .gray)
+                        .foregroundColor(
+                            repositoryResultsVm.filterBarState == tab ? .primary : .gray
+                        )
                     
                     if repositoryResultsVm.filterBarState == tab{
                         Capsule()
