@@ -31,6 +31,7 @@ struct ContributorsView: View {
                     
                     ContributorsScrollLoadingStateView(repositoryResultsVm: repositoryResultsVm)
                 }
+                .listRowSeparator(.hidden)
                 .listStyle(.inset)
                 
             }
