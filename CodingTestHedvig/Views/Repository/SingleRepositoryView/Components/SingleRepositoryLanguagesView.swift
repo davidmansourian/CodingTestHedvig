@@ -9,6 +9,7 @@ import SwiftUI
 import Charts
 
 struct SingleRepositoryLanguagesView: View {
+    @Environment(\.colorScheme) var colorScheme
     @StateObject var repositoryResultsVm: RepositoryResultsViewModel
     @State var languagesUrl: String
     
@@ -39,7 +40,7 @@ struct SingleRepositoryLanguagesView: View {
         .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .fill(Color(.white))
+                .fill(colorScheme == .dark ? Color.black : Color.white)
                 .shadow(radius: 2)
         )
         .padding(.horizontal, 10)
