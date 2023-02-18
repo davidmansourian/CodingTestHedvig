@@ -201,7 +201,6 @@
 		DB369071299E309B00B76091 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DB36912B29A1812400B76091 /* ShimmerEffect */,
 				DB36912629A17B9100B76091 /* OfflineView */,
 				DB36911129A11D2900B76091 /* Contributors */,
 				DB3690E729A0137700B76091 /* Repository */,
@@ -262,6 +261,7 @@
 		DB369096299ED1A000B76091 /* Reusables */ = {
 			isa = PBXGroup;
 			children = (
+				DB36912B29A1812400B76091 /* ShimmerEffect */,
 				DB369098299ED1B900B76091 /* LoadingIndicatorView.swift */,
 				DB3690B4299F7D0900B76091 /* ChevronIconViews.swift */,
 			);
