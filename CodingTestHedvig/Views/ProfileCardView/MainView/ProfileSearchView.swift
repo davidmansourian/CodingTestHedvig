@@ -54,6 +54,7 @@ struct ProfileSearchView: View{
                                         repositoryVm.pageNumberRepos = 1 // resetting page number
                                         repositoryVm.fillRepositoryDataModel(url: repositoryVm.repoURLPageBuilder(URLString: theResult.profileReposUrl, pageNumber: repositoryVm.pageNumberRepos, perPageNumber: repositoryVm.resultsPerPage))
                                         repositoryVm.pickedProfile = theResult.profileUsername
+                                        repositoryVm.scrollLoadingStateRepos = .idle
                                     }))
                                     
                                 }

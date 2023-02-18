@@ -19,16 +19,18 @@ struct SingleRepositoryLanguagesView: View {
     }
     var body: some View {
         Chart(repositoryResultsVm.repoLanguages){ element in
+            let barColor = Color(hex: element.color.description) ?? .primary
                 BarMark(
                     x: .value("Percentage", Int(element.percentage ?? 0)),
                     y: .value("Language", element.language )
                 )
+                .foregroundStyle(barColor)
+                //.foregroundStyle(by: .value("Languages", element.language))
                 .annotation(position: .trailing, alignment: .center) {
                     Text("\(element.percentage ?? 0, format: .number.precision(.fractionLength(2)))%")
                         .foregroundColor(.primary)
                         .font(.subheadline)
                 }
-                .foregroundStyle(by: .value("Languages", element.language ))
         }
         .padding()
         .onAppear(){

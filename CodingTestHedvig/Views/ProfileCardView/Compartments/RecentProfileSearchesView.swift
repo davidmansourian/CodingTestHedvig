@@ -29,6 +29,7 @@ struct RecentProfileSearchesView: View {
                     repositoryResultsVm.pageNumberRepos = 1 // resetting page number
                     repositoryResultsVm.fillRepositoryDataModel(url: repositoryResultsVm.repoURLPageBuilder(URLString: recentSearches.repoURL, pageNumber: repositoryResultsVm.pageNumberRepos, perPageNumber: repositoryResultsVm.resultsPerPage))
                     repositoryResultsVm.pickedProfile = recentSearches.username
+                    repositoryResultsVm.scrollLoadingStateRepos = .idle
                 } label: {
                     HStack{
                         ProfileAvatarView(profileResultsVm: profileResultsVm, image: UIImage(data: recentSearches.avatar)!)
@@ -51,16 +52,6 @@ struct RecentProfileSearchesView: View {
                     }
                 }
                 .listRowSeparator(.hidden)
-               /* .simultaneousGesture(TapGesture().onEnded({
-                    profileResultsVm.checkIfAlreadySearched(searchedName: recentSearches.username)
-                    profileResultsVm.checkStorageArr()
-                    profileResultsVm.recentSearches.append(LastSearched(avatar: UIImage(data: recentSearches.avatar)!, username: recentSearches.username, repoUrl: recentSearches.repoURL))
-                    repositoryResultsVm.filterBarState = .all
-                    repositoryResultsVm.currentURL = recentSearches.repoURL
-                    repositoryResultsVm.pageNumberRepos = 1 // resetting page number
-                    repositoryResultsVm.fillRepositoryDataModel(url: repositoryResultsVm.repoURLPageBuilder(URLString: recentSearches.repoURL, pageNumber: repositoryResultsVm.pageNumberRepos, perPageNumber: repositoryResultsVm.resultsPerPage))
-                    repositoryResultsVm.pickedProfile = recentSearches.username
-                })) */
             }
         }
         .listStyle(.inset)

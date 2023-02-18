@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct CodingTestHedvigApp: App {
+    
     var body: some Scene {
         WindowGroup {
-           ProfileSearchView()
+           ViewDelegator()
         }
     }
 }
