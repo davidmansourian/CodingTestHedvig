@@ -34,6 +34,21 @@ class APIService{
         return searchResults
     }
     
+    
+    func loadContributors(url: String) async throws -> [ContributorElement]{
+        guard let urlString = URL(string: url) else { throw URLError(.badURL) }
+        var contributors: [ContributorElement] = []
+        
+        do{
+            let (data, _) = try await URLSession.shared.data(from: urlString)
+            contributors = try JSONDecoder().decode([ContributorElement].self, from: data)
+        } catch {
+            throw error
+        }
+        //print(searchResults)
+        return contributors
+    }
+    
     func loadRepositoryData(url: String) async throws -> [Welcome3Element]{
         guard let urlString = URL(string: url) else { throw URLError(.badURL) }
         var searchResults: [Welcome3Element] = []
@@ -63,15 +78,11 @@ class APIService{
         return languageDict ?? RepoLanguages()
     }
     
-    
-    
-    
-    
     func getReadmeURL(url: String) async throws -> String{
         guard let urlString = URL(string: url) else { throw URLError(.badURL)}
         var readmeURL: String?
         do{
-            let (data, response) = try await URLSession.shared.data(from: urlString)
+            let (data, _) = try await URLSession.shared.data(from: urlString)
            // print("this is reponse: \(response)")
             let readmeData = try JSONDecoder().decode(ReadmeDataModel.self, from: data)
             if readmeData.message == nil{

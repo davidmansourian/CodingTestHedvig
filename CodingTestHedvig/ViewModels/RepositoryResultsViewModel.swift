@@ -14,6 +14,7 @@ import Combine
     @Published var filteredRepositoryDetail: [RepositoryDetailModel] = []
     @Published var hexColorCodes: HexColorCodes?
     @Published var repoLanguages: [RepoLanguage] = []
+    @Published var repoContributors: [ContributorDataModel] = []
     
     
     @Published var viewState = RepositoryViewState.loading
@@ -77,9 +78,6 @@ import Combine
     }
     
     func paginateRepositoryData(URLString: String){
-        // when reaching a page that does not contain any repositories, the array is simply empty. It is easy to check for it this way.
-        
-        // if next get request is empty, then the onAppear should not load no more
         Task{
             guard scrollLoadingState == InfinityScrollState.idle else { return }
             self.scrollLoadingState = .loading
@@ -117,7 +115,7 @@ import Combine
         Task{
             // paginateRepositoryData(URLString: url)
             repositoryDetail.removeAll()
-            self.viewState = RepositoryViewState.loading
+            self.viewState = .loading
             let searchResult = try await APIService.shared.loadRepositoryData(url: url)
             
             if searchResult.isEmpty{
@@ -130,8 +128,23 @@ import Combine
                     
                     self.repositoryDetail.append(RepositoryDetailModel(repositoryTitle: theResult.name ?? "", repositoryDescription: theResult.description ?? "", repositoryOwner: theResult.owner?.login ?? "", ownerImage: image ?? UIImage(), watchers: theResult.watchers ?? 0, createdAt: theResult.createdAt, updatedAt: theResult.updatedAt, forks: theResult.forksCount, stars: theResult.starredCount, contributorsUrl: theResult.contributorsUrl ?? "", languagesUrl: theResult.languagesUrl, activeIssues: theResult.openIssues))
                 }
-                self.viewState = RepositoryViewState.showingResult
+                self.viewState = .showingResult
             }
+        }
+    }
+    
+    func loadContributors(URLString: String){
+        Task{
+            repoContributors.removeAll()
+            self.viewState = .loading
+            let loadedContributors = try await APIService.shared.loadContributors(url: URLString)
+            for contributor in loadedContributors{
+                let imageUrl = contributor.avatarURL
+                let image = try await APIService.shared.downloadImage(urlString: imageUrl)
+                
+                self.repoContributors.append(ContributorDataModel(username: contributor.login, image: image ?? UIImage(), contributions: contributor.contributions))
+            }
+            self.viewState = .showingResult
         }
     }
     
@@ -178,6 +191,7 @@ import Combine
     
     
     
+    
     func loadRepoLanguages(URLString: String){
         Task{
             self.repoLanguages.removeAll()
@@ -203,9 +217,6 @@ import Combine
             }
         }
     }
-    
-    
-    
     
     func loadColorCodes(){
         guard let path = Bundle.main.path(forResource: "GitLangColors", ofType: "json") else {
