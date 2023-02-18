@@ -16,7 +16,8 @@ struct ContributorsView: View {
     var body: some View {
         NavigationStack{
             VStack{
-                Text("\(repositoryResultsVm.totalContributions) contributions by \(repositoryResultsVm.totalContriubutors) contributors")
+                Text(
+                    repositoryResultsVm.totalContriubutors == 1 ? "\(repositoryResultsVm.totalContributions) contributions by \(repositoryResultsVm.totalContriubutors) contributor" : "\(repositoryResultsVm.totalContributions) contributions by \(repositoryResultsVm.totalContriubutors) contributors")
                     .font(.subheadline)
                     .fontWeight(.light)
                     .padding()

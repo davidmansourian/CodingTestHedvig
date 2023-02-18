@@ -38,7 +38,7 @@ import Combine
     @Published var resultsPerPage: Int = 20
     
     @Published var showingRepository: Bool = false
-    @Published var hasReadme: Bool = true
+    @Published var scrollToTop: Bool = false
     
     private var cancellables = Set<AnyCancellable>()
     

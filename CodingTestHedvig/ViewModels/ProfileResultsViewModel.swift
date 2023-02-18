@@ -11,9 +11,13 @@ import SwiftUI
 
 
 @MainActor class ProfileResultsViewModel: ObservableObject{
+    @AppStorage("recentSearches") var recentSearches: [LastSearched] = []
+    
     @Published var profileResults: [ProfileDetailModel] = []
     @Published var searchString: String = ""
     @Published var viewState = SearchResultViewState.noSearchString
+    
+    @Published var avatarImage: UIImage?
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -35,6 +39,36 @@ import SwiftUI
             .store(in: &cancellables)
     }
     
+    func checkStorageArr(){
+        if recentSearches.count >= 10{
+            recentSearches.popLast()
+        }
+    }
+    
+    func checkIfAlreadySearched(searchedName: String){
+        let hasSearched = recentSearches.contains{ $0.username == searchedName}
+        
+        if hasSearched{
+            removeFromSearch(username: searchedName)
+            print("removed element")
+        } else {
+            print("didnt remove element")
+        }
+        
+    }
+    
+    func removeFromSearch(username: String){
+        recentSearches.removeAll{$0.username == username}
+    }
+   
+    
+    func getImageFromURL(url: String){
+        Task{
+            guard let image = try await APIService.shared.downloadImage(urlString: url) else { return}
+            self.avatarImage = image
+        }
+    }
+    
     
     func fillUserDataModel(url: String){
         Task{
@@ -51,7 +85,7 @@ import SwiftUI
                     let imageUrl = theResult.avatarUrl
                     let image = try await APIService.shared.downloadImage(urlString: imageUrl)
                     
-                    self.profileResults.append(ProfileDetailModel(profileUsername: theResult.login, profileAccountType: theResult.type, profileReposUrl: theResult.reposUrl, profileImage: image ?? UIImage()))
+                    self.profileResults.append(ProfileDetailModel(profileUsername: theResult.login, profileAccountType: theResult.type, profileReposUrl: theResult.reposUrl, profileImage: image ?? UIImage(), profileImageURL: theResult.avatarUrl))
                     
                     counter += 1
                 }

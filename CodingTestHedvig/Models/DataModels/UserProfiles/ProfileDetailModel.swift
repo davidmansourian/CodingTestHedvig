@@ -15,4 +15,5 @@ struct ProfileDetailModel: Identifiable{
     let profileAccountType: String
     let profileReposUrl: String
     let profileImage: UIImage
+    let profileImageURL: String
 }
