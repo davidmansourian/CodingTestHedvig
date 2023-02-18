@@ -18,18 +18,24 @@ import Combine
     
     
     @Published var viewState = RepositoryViewState.loading
-    @Published var scrollLoadingState: InfinityScrollState = .idle
+    @Published var scrollLoadingStateRepos: InfinityScrollStateRepos = .idle
+    @Published var scrollLoadingStateContributors: InfinityScrollStateContributors = .idle
     @Published var filterBarState: RepositoryFilterBarState = .all
     
     @Published var currentURL: String = ""
     @Published var pickedProfile: String = ""
     @Published var readmeURL: String?
+    @Published var currentContributorsURL: String = ""
     
     @Published var totalRepositories: Int = 0
-    @Published var pageNumber: Int = 1
-    @Published var resultsPerPage: Int = 20
     @Published var totalLanguagesValue: Int = 0
     @Published var totalContriubutors: Int = 0
+    @Published var totalContributions: Int = 0
+    
+    @Published var pageNumberRepos: Int = 1
+    @Published var pageNumberContributors: Int = 1
+    
+    @Published var resultsPerPage: Int = 20
     
     @Published var showingRepository: Bool = false
     @Published var hasReadme: Bool = true
@@ -78,17 +84,29 @@ import Combine
         return components?.url?.absoluteString ?? ""
     }
     
+    func contributorURLPageBuilder(URLString: String, pageNumber: Int, perPageNumber: Int) -> String{
+        var components = URLComponents(string: URLString)
+        
+        // ?type=all&sort=updated&affiliation=collaborator&page=2&per_page=100
+        
+        components?.queryItems = [URLQueryItem(name: "page", value: String(pageNumber)),
+                                  URLQueryItem(name: "per_page", value: String(perPageNumber))
+        ]
+        
+        return components?.url?.absoluteString ?? ""
+    }
+    
     func paginateRepositoryData(URLString: String){
         Task{
-            guard scrollLoadingState == InfinityScrollState.idle else { return }
-            self.scrollLoadingState = .loading
-            self.pageNumber += 1
-            let url = repoURLPageBuilder(URLString: URLString, pageNumber: self.pageNumber, perPageNumber: self.resultsPerPage)
+            guard scrollLoadingStateRepos == InfinityScrollStateRepos.idle else { return }
+            self.scrollLoadingStateRepos = .loading
+            self.pageNumberRepos += 1
+            let url = repoURLPageBuilder(URLString: URLString, pageNumber: self.pageNumberRepos, perPageNumber: self.resultsPerPage)
             let nextPageData = try await APIService.shared.loadRepositoryData(url: url)
             
             if nextPageData.isEmpty{
                 print("nextpagedata is empty")
-                self.scrollLoadingState = .finished
+                self.scrollLoadingStateRepos = .finished
             } else {
                 // self.scrollLoadingState = InfinityScrollState.loading -> Need bottom animation here, not complete state change
                 self.totalRepositories += nextPageData.count
@@ -99,8 +117,36 @@ import Combine
                     
                     self.repositoryDetail.append(RepositoryDetailModel(repositoryTitle: theResult.name ?? "", repositoryDescription: theResult.description ?? "", repositoryOwner: theResult.owner?.login ?? "", ownerImage: image ?? UIImage(), watchers: theResult.watchers ?? 0, createdAt: theResult.createdAt, updatedAt: theResult.updatedAt, forks: theResult.forksCount, stars: theResult.starredCount, contributorsUrl: theResult.contributorsUrl ?? "", languagesUrl: theResult.languagesUrl, activeIssues: theResult.openIssues))
                 }
-                self.scrollLoadingState = .idle
+                self.scrollLoadingStateRepos = .idle
                 print(self.repositoryDetail.count)
+            }
+            
+        }
+        
+    }
+    
+    func paginateContributors(URLString: String){
+        Task{
+            guard scrollLoadingStateContributors == InfinityScrollStateContributors.idle else { return }
+            self.scrollLoadingStateContributors = .loading
+            self.pageNumberContributors += 1
+            let url = contributorURLPageBuilder(URLString: URLString, pageNumber: self.pageNumberContributors, perPageNumber: self.resultsPerPage)
+            let nextPageData = try await APIService.shared.loadContributors(url: url)
+            
+            if nextPageData.isEmpty{
+                print("nextpagedata is empty")
+                self.scrollLoadingStateContributors = .finished
+            } else {
+                // self.scrollLoadingState = InfinityScrollState.loading -> Need bottom animation here, not complete state change
+                self.totalContriubutors += nextPageData.count
+                for theResult in nextPageData{
+                    
+                    let imageUrl = theResult.avatarURL
+                    let image = try await APIService.shared.downloadImage(urlString: imageUrl)
+                    
+                    self.repoContributors.append(ContributorDataModel(username: theResult.login, image: image ?? UIImage(), contributions: theResult.contributions))
+                }
+                self.scrollLoadingStateContributors = .idle
             }
             
         }
@@ -140,6 +186,7 @@ import Combine
             let loadedContributors = try await APIService.shared.loadContributors(url: URLString)
             self.totalContriubutors = loadedContributors.count
             for contributor in loadedContributors{
+                self.totalContributions += contributor.contributions
                 let imageUrl = contributor.avatarURL
                 let image = try await APIService.shared.downloadImage(urlString: imageUrl)
                 

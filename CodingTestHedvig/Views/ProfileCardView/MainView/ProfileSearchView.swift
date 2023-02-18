@@ -38,8 +38,8 @@ struct ProfileSearchView: View{
                                 .simultaneousGesture(TapGesture().onEnded({
                                     repositoryVm.filterBarState = .all
                                     repositoryVm.currentURL = theResult.profileReposUrl
-                                    repositoryVm.pageNumber = 1 // resetting page number
-                                    repositoryVm.fillRepositoryDataModel(url: repositoryVm.repoURLPageBuilder(URLString: theResult.profileReposUrl, pageNumber: repositoryVm.pageNumber, perPageNumber: repositoryVm.resultsPerPage))
+                                    repositoryVm.pageNumberRepos = 1 // resetting page number
+                                    repositoryVm.fillRepositoryDataModel(url: repositoryVm.repoURLPageBuilder(URLString: theResult.profileReposUrl, pageNumber: repositoryVm.pageNumberRepos, perPageNumber: repositoryVm.resultsPerPage))
                                     repositoryVm.pickedProfile = theResult.profileUsername
                                 }))
                               Divider()

@@ -7,6 +7,10 @@
 
 import Foundation
 
-enum InfinityScrollState{
+enum InfinityScrollStateRepos{
+    case idle, loading, finished
+}
+
+enum InfinityScrollStateContributors{
     case idle, loading, finished
 }

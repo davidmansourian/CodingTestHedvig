@@ -16,14 +16,19 @@ struct ContributorsView: View {
     var body: some View {
         NavigationStack{
             VStack{
-                Text("\(repositoryResultsVm.totalContriubutors) contributors")
-                    .font(.title)
+                Text("\(repositoryResultsVm.totalContributions) contributions by \(repositoryResultsVm.totalContriubutors) contributors")
+                    .font(.subheadline)
                     .fontWeight(.light)
                     .padding()
+                    .foregroundColor(.primary)
+                Divider()
+                    .offset(y: -5)
                 List{
                     ForEach(repositoryResultsVm.repoContributors){ contributor in
                         ContributorRowView(repositoryResultsVm: repositoryResultsVm, username: contributor.username, image: contributor.image, contributions: contributor.contributions)
                     }
+                    
+                    ContributorsScrollLoadingStateView(repositoryResultsVm: repositoryResultsVm)
                 }
                 .listStyle(.inset)
                 
