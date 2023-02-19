@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 
+// Use HEX with Color
 // Source: https://blog.eidinger.info/from-hex-to-color-and-back-in-swiftui
 extension Color {
     init?(hex: String) {
