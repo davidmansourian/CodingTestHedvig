@@ -156,6 +156,7 @@ import Combine
                 
                 switch nextPageData{
                 case .success(let newPageData):
+                    self?.APIResponseState = .good
                     if newPageData.isEmpty{
                         print("nextpagedata is empty")
                         self?.scrollLoadingStateContributors = .finished
@@ -204,6 +205,7 @@ import Combine
             
             switch loadedContributors{
             case .success(let contributorsData):
+                self?.APIResponseState = .good
                 self?.totalContriubutors = contributorsData.count
                 for contributor in contributorsData{
                     self?.totalContributions += contributor.contributions

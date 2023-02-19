@@ -316,8 +316,8 @@
 		DB3690B9299F7F4800B76091 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
-				DB3690AA299EF24700B76091 /* RepositoryListView.swift */,
 				DB3690CD299FE06800B76091 /* RepositoryListStateView.swift */,
+				DB3690AA299EF24700B76091 /* RepositoryListView.swift */,
 				DB3690D2299FE52600B76091 /* RepositoryScrollLoadingStateView.swift */,
 				DB3690CF299FE0E900B76091 /* RepositoryFilterStateView.swift */,
 			);
