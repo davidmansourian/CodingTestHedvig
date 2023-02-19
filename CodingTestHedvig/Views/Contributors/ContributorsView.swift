@@ -22,7 +22,7 @@ struct ContributorsView: View {
                 case .good:
                     LoadingIndicatorView()
                 case .fail:
-                    EmptyView()
+                    Text("Error loading")
                         .alert(repositoryResultsVm.APIErrorResponse?.message ?? "Error", isPresented: $repositoryResultsVm.showingAlert) {
                             Button("OK", role: .cancel) {
                                 repositoryResultsVm.showingAlert = false
