@@ -18,7 +18,17 @@ struct ContributorsView: View {
             VStack{
                 switch repositoryResultsVm.contributorsViewState{
                 case .loading:
+                switch repositoryResultsVm.APIResponseState{
+                case .good:
                     LoadingIndicatorView()
+                case .fail:
+                    EmptyView()
+                        .alert(repositoryResultsVm.APIErrorResponse?.message ?? "Error", isPresented: $repositoryResultsVm.showingAlert) {
+                            Button("OK", role: .cancel) {
+                                repositoryResultsVm.showingAlert = false
+                            }
+                        }
+                }
                 case .showingResult:
                     Text(
                         repositoryResultsVm.totalContriubutors == 1 ? "\(repositoryResultsVm.totalContributions) contributions by \(repositoryResultsVm.totalContriubutors) contributor" : "\(repositoryResultsVm.totalContributions) contributions by \(repositoryResultsVm.totalContriubutors) contributors")

@@ -201,16 +201,25 @@ import Combine
             self?.contributorsViewState = .loading
             repoContributors.removeAll()
             let loadedContributors = try await APIService.shared.loadContributors(url: URLString)
-            self?.totalContriubutors = loadedContributors.count
-            for contributor in loadedContributors{
-                self?.totalContributions += contributor.contributions
-                let imageUrl = contributor.avatarURL
-                let image = try await APIService.shared.downloadImage(urlString: imageUrl)
-                
-                self?.repoContributors.append(ContributorDataModel(username: contributor.login, image: image ?? UIImage(), contributions: contributor.contributions))
-            }
             
-            self?.contributorsViewState = .showingResult
+            switch loadedContributors{
+            case .success(let contributorsData):
+                self?.totalContriubutors = contributorsData.count
+                for contributor in contributorsData{
+                    self?.totalContributions += contributor.contributions
+                    let imageUrl = contributor.avatarURL
+                    let image = try await APIService.shared.downloadImage(urlString: imageUrl)
+                    
+                    self?.repoContributors.append(ContributorDataModel(username: contributor.login, image: image ?? UIImage(), contributions: contributor.contributions))
+                }
+                self?.contributorsViewState = .showingResult
+                
+            case .error(let errorData):
+                self?.APIResponseState = .fail
+                self?.showingAlert = true
+                self?.APIErrorResponse = errorData
+                
+            }
         }
     }
     
@@ -244,7 +253,7 @@ import Combine
             }
         }
     }
-
+    
     func sortRepositories(action: SortRepository){
         self.viewState = RepositoryViewState.loading
         
@@ -325,7 +334,7 @@ import Combine
             if let colorsArray = json as? HexColorCodes {
                 let colorsDict = colorsArray
                 self.hexColorCodes = colorsDict
-              //  print(self.hexColorCodes?.first)
+                //  print(self.hexColorCodes?.first)
             }
         } catch{
             print(error)
@@ -333,7 +342,7 @@ import Combine
         
     }
     
- // https://api.github.com/repos/apple/swift/readme
+    // https://api.github.com/repos/apple/swift/readme
     
     func findReadmeURL(username: String, repoName: String){
         Task{ [weak self] in
