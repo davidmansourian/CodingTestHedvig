@@ -14,7 +14,6 @@ class APIService{
     @Published var fetchedRepositories: [Welcome3Element]?
     @Published var fetchedProfiles: [ProfileDataModel]?
     private var jsonDecoder = JSONDecoder()
-    private var searchType = APICallState.userSearch
     
     // https://api.github.com/search/users?q=davidmansourian
 
@@ -35,32 +34,48 @@ class APIService{
     }
     
     
-    func loadContributors(url: String) async throws -> [ContributorElement]{
+    func loadContributors(url: String) async throws -> RepositoryReturnTypeState<[ContributorElement], APIMaxedOutModel>{
         guard let urlString = URL(string: url) else { throw URLError(.badURL) }
         var contributors: [ContributorElement] = []
         
         do{
             let (data, _) = try await URLSession.shared.data(from: urlString)
-            contributors = try JSONDecoder().decode([ContributorElement].self, from: data)
+            guard let JSONResponse = try? JSONDecoder().decode([ContributorElement].self, from: data) else {
+                guard let nextJSONResponse = try? JSONDecoder().decode(APIMaxedOutModel.self, from: data) else {
+                    throw DecodingError(
+                        message: "Failed to decode JSON-data. Unknown error"
+                    )
+                }
+                return .error(nextJSONResponse)
+            }
+            contributors = JSONResponse
         } catch {
             throw error
         }
         //print(searchResults)
-        return contributors
+        return .success(contributors)
     }
     
-    func loadRepositoryData(url: String) async throws -> [Welcome3Element]{
+    func loadRepositoryData(url: String) async throws -> RepositoryReturnTypeState<[Welcome3Element], APIMaxedOutModel>{
         guard let urlString = URL(string: url) else { throw URLError(.badURL) }
         var searchResults: [Welcome3Element] = []
         
         do{
             let (data, _) = try await URLSession.shared.data(from: urlString)
-            searchResults = try JSONDecoder().decode([Welcome3Element].self, from: data)
+            guard let JSONResponse = try? JSONDecoder().decode([Welcome3Element].self, from: data) else {
+                guard let nextJSONResponse = try? JSONDecoder().decode(APIMaxedOutModel.self, from: data) else {
+                    throw DecodingError(
+                        message: "Failed to decode JSON-data. Unknown error"
+                    )
+                }
+                return .error(nextJSONResponse)
+            }
+            searchResults = JSONResponse
         } catch {
             throw error
         }
         //print(searchResults)
-        return searchResults
+        return .success(searchResults)
     }
     
     func loadRepoLanguages(url: String) async throws -> RepoLanguages{

@@ -16,7 +16,17 @@ struct RepositoryListStateView: View {
     var body: some View {
         switch repositoryResultsVm.viewState{
         case .loading:
-            LoadingIndicatorView()
+            switch repositoryResultsVm.APIResponseState{
+            case .good:
+                LoadingIndicatorView()
+            case .fail:
+                NoRepositoriesView()
+                    .alert(repositoryResultsVm.APIErrorResponse?.message ?? "Error", isPresented: $repositoryResultsVm.showingAlert) {
+                        Button("OK", role: .cancel) {
+                            repositoryResultsVm.showingAlert = false
+                        }
+                    }
+            }
         case .isEmpty:
             NoRepositoriesView()
         case .showingResult:

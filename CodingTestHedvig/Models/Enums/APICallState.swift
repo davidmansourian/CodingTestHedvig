@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum APICallState: String{
-    case userSearch = "/users?q="
+enum APIResponseState: String{
+    case good, fail
 }

@@ -97,9 +97,7 @@ struct SingleRepositoryView: View {
                 
             }
             .onAppear{
-                repositoryResultsVm.totalContributions = 0
-                repositoryResultsVm.pageNumberContributors = 1
-                repositoryResultsVm.totalContriubutors = 0
+                repositoryResultsVm.resetRepositoryStats()
                 repositoryResultsVm.currentContributorsURL = contributorsUrl
                 let builtURL = repositoryResultsVm.contributorURLPageBuilder(URLString: contributorsUrl, pageNumber: repositoryResultsVm.pageNumberContributors, perPageNumber: repositoryResultsVm.resultsPerPage)
                 repositoryResultsVm.loadContributors(URLString: builtURL)

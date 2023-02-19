@@ -15,6 +15,7 @@ import Combine
     @Published var hexColorCodes: HexColorCodes?
     @Published var repoLanguages: [RepoLanguage] = []
     @Published var repoContributors: [ContributorDataModel] = []
+    @Published var APIErrorResponse: APIMaxedOutModel?
     
     
     @Published var viewState = RepositoryViewState.loading
@@ -22,6 +23,7 @@ import Combine
     @Published var scrollLoadingStateContributors: InfinityScrollStateContributors = .idle
     @Published var filterBarState: RepositoryFilterBarState = .all
     @Published var contributorsViewState: ContributorsViewState = .loading
+    @Published var APIResponseState: APIResponseState = .good
     
     @Published var currentURL: String = ""
     @Published var pickedProfile: String = ""
@@ -40,6 +42,7 @@ import Combine
     
     @Published var showingRepository: Bool = false
     @Published var scrollToTop: Bool = false
+    @Published var showingAlert: Bool = false
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -98,28 +101,43 @@ import Combine
     }
     
     func paginateRepositoryData(URLString: String){
-        Task{
+        Task{ [weak self] in
             guard scrollLoadingStateRepos == InfinityScrollStateRepos.idle else { return }
-            self.scrollLoadingStateRepos = .loading
-            self.pageNumberRepos += 1
-            let url = repoURLPageBuilder(URLString: URLString, pageNumber: self.pageNumberRepos, perPageNumber: self.resultsPerPage)
-            let nextPageData = try await APIService.shared.loadRepositoryData(url: url)
+            self?.scrollLoadingStateRepos = .loading
+            self?.pageNumberRepos += 1
+            let url = repoURLPageBuilder(URLString: URLString, pageNumber: self?.pageNumberRepos ?? 1, perPageNumber: self?.resultsPerPage ?? 20)
             
-            if nextPageData.isEmpty{
-                print("nextpagedata is empty")
-                self.scrollLoadingStateRepos = .finished
-            } else {
-                // self.scrollLoadingState = InfinityScrollState.loading -> Need bottom animation here, not complete state change
-                self.totalRepositories += nextPageData.count
-                for theResult in nextPageData{
-                    
-                    guard let imageUrl = theResult.owner?.avatarUrl else { return }
-                    let image = try await APIService.shared.downloadImage(urlString: imageUrl)
-                    
-                    self.repositoryDetail.append(RepositoryDetailModel(repositoryTitle: theResult.name ?? "", repositoryDescription: theResult.description ?? "", repositoryOwner: theResult.owner?.login ?? "", ownerImage: image ?? UIImage(), watchers: theResult.watchers ?? 0, createdAt: theResult.createdAt, updatedAt: theResult.updatedAt, forks: theResult.forksCount, stars: theResult.starredCount, contributorsUrl: theResult.contributorsUrl ?? "", languagesUrl: theResult.languagesUrl, activeIssues: theResult.openIssues))
+            do{
+                let nextPageData = try await APIService.shared.loadRepositoryData(url: url)
+                
+                switch nextPageData{
+                case .success(let newPageData):
+                    self?.APIResponseState = .good
+                    if newPageData.isEmpty{
+                        print("nextpagedata is empty")
+                        self?.scrollLoadingStateRepos = .finished
+                    } else {
+                        // self.scrollLoadingState = InfinityScrollState.loading -> Need bottom animation here, not complete state change
+                        self?.totalRepositories += newPageData.count
+                        for theResult in newPageData{
+                            
+                            guard let imageUrl = theResult.owner?.avatarUrl else { return }
+                            let image = try await APIService.shared.downloadImage(urlString: imageUrl)
+                            
+                            self?.repositoryDetail.append(RepositoryDetailModel(repositoryTitle: theResult.name ?? "", repositoryDescription: theResult.description ?? "", repositoryOwner: theResult.owner?.login ?? "", ownerImage: image ?? UIImage(), watchers: theResult.watchers ?? 0, createdAt: theResult.createdAt, updatedAt: theResult.updatedAt, forks: theResult.forksCount, stars: theResult.starredCount, contributorsUrl: theResult.contributorsUrl ?? "", languagesUrl: theResult.languagesUrl, activeIssues: theResult.openIssues))
+                        }
+                        self?.scrollLoadingStateRepos = .idle
+                        print(self?.repositoryDetail.count)
+                    }
+                case .error(let errorData):
+                    self?.APIResponseState = .fail
+                    self?.showingAlert = true
+                    self?.APIErrorResponse = errorData
+                    // Look for case in view
                 }
-                self.scrollLoadingStateRepos = .idle
-                print(self.repositoryDetail.count)
+            } catch {
+                print("Error loading repository data: \(error)")
+                self?.scrollLoadingStateRepos = .idle
             }
             
         }
@@ -127,27 +145,41 @@ import Combine
     }
     
     func paginateContributors(URLString: String){
-        Task{
+        Task{ [weak self] in
             guard scrollLoadingStateContributors == InfinityScrollStateContributors.idle else { return }
-            self.scrollLoadingStateContributors = .loading
-            self.pageNumberContributors += 1
-            let url = contributorURLPageBuilder(URLString: URLString, pageNumber: self.pageNumberContributors, perPageNumber: self.resultsPerPage)
-            let nextPageData = try await APIService.shared.loadContributors(url: url)
+            self?.scrollLoadingStateContributors = .loading
+            self?.pageNumberContributors += 1
+            let url = contributorURLPageBuilder(URLString: URLString, pageNumber: self?.pageNumberContributors ?? 1, perPageNumber: self?.resultsPerPage ?? 20)
             
-            if nextPageData.isEmpty{
-                print("nextpagedata is empty")
-                self.scrollLoadingStateContributors = .finished
-            } else {
-                // self.scrollLoadingState = InfinityScrollState.loading -> Need bottom animation here, not complete state change
-                self.totalContriubutors += nextPageData.count
-                for theResult in nextPageData{
-                    
-                    let imageUrl = theResult.avatarURL
-                    let image = try await APIService.shared.downloadImage(urlString: imageUrl)
-                    
-                    self.repoContributors.append(ContributorDataModel(username: theResult.login, image: image ?? UIImage(), contributions: theResult.contributions))
+            do{
+                let nextPageData = try await APIService.shared.loadContributors(url: url)
+                
+                switch nextPageData{
+                case .success(let newPageData):
+                    if newPageData.isEmpty{
+                        print("nextpagedata is empty")
+                        self?.scrollLoadingStateContributors = .finished
+                    } else {
+                        // self.scrollLoadingState = InfinityScrollState.loading -> Need bottom animation here, not complete state change
+                        self?.totalContriubutors += newPageData.count
+                        for theResult in newPageData{
+                            
+                            let imageUrl = theResult.avatarURL
+                            let image = try await APIService.shared.downloadImage(urlString: imageUrl)
+                            
+                            self?.repoContributors.append(ContributorDataModel(username: theResult.login, image: image ?? UIImage(), contributions: theResult.contributions))
+                        }
+                        self?.scrollLoadingStateContributors = .idle
+                    }
+                case .error(let errorData):
+                    self?.APIResponseState = .fail
+                    self?.showingAlert = true
+                    self?.APIErrorResponse = errorData
                 }
-                self.scrollLoadingStateContributors = .idle
+            } catch {
+                print("Error loading repository data: \(error)")
+                print("localizedDescription:  \(error.localizedDescription)")
+                self?.scrollLoadingStateContributors = .idle
             }
             
         }
@@ -158,48 +190,61 @@ import Combine
         self.showingRepository = false
     }
     
-    
-    func fillRepositoryDataModel(url: String){
-        Task{
-            // paginateRepositoryData(URLString: url)
-            repositoryDetail.removeAll()
-            self.viewState = .loading
-            let searchResult = try await APIService.shared.loadRepositoryData(url: url)
-            
-            if searchResult.isEmpty{
-                self.viewState = RepositoryViewState.isEmpty
-            } else {
-                self.totalRepositories = searchResult.count
-                for theResult in searchResult{
-                    guard let imageUrl = theResult.owner?.avatarUrl else { return }
-                    let image = try await APIService.shared.downloadImage(urlString: imageUrl)
-                    
-                    self.repositoryDetail.append(RepositoryDetailModel(repositoryTitle: theResult.name ?? "", repositoryDescription: theResult.description ?? "", repositoryOwner: theResult.owner?.login ?? "", ownerImage: image ?? UIImage(), watchers: theResult.watchers ?? 0, createdAt: theResult.createdAt, updatedAt: theResult.updatedAt, forks: theResult.forksCount, stars: theResult.starredCount, contributorsUrl: theResult.contributorsUrl ?? "", languagesUrl: theResult.languagesUrl, activeIssues: theResult.openIssues))
-                }
-                self.viewState = .showingResult
-            }
-        }
+    func resetRepositoryStats(){
+        self.totalContributions = 0
+        self.pageNumberContributors = 1
+        self.totalContriubutors = 0
     }
     
     func loadContributors(URLString: String){
-        Task{
-            self.contributorsViewState = .loading
+        Task{ [weak self] in
+            self?.contributorsViewState = .loading
             repoContributors.removeAll()
             let loadedContributors = try await APIService.shared.loadContributors(url: URLString)
-            self.totalContriubutors = loadedContributors.count
+            self?.totalContriubutors = loadedContributors.count
             for contributor in loadedContributors{
-                self.totalContributions += contributor.contributions
+                self?.totalContributions += contributor.contributions
                 let imageUrl = contributor.avatarURL
                 let image = try await APIService.shared.downloadImage(urlString: imageUrl)
                 
-                self.repoContributors.append(ContributorDataModel(username: contributor.login, image: image ?? UIImage(), contributions: contributor.contributions))
+                self?.repoContributors.append(ContributorDataModel(username: contributor.login, image: image ?? UIImage(), contributions: contributor.contributions))
             }
             
-            self.contributorsViewState = .showingResult
+            self?.contributorsViewState = .showingResult
         }
     }
     
     
+    func fillRepositoryDataModel(url: String){
+        Task{ [weak self] in
+            // paginateRepositoryData(URLString: url)
+            repositoryDetail.removeAll()
+            self?.viewState = .loading
+            let searchResult = try await APIService.shared.loadRepositoryData(url: url)
+            
+            switch searchResult{
+            case .success(let searchResultData):
+                self?.APIResponseState = .good
+                if searchResultData.isEmpty{
+                    self?.viewState = RepositoryViewState.isEmpty
+                } else {
+                    self?.totalRepositories = searchResultData.count
+                    for theResult in searchResultData{
+                        guard let imageUrl = theResult.owner?.avatarUrl else { return }
+                        let image = try await APIService.shared.downloadImage(urlString: imageUrl)
+                        
+                        self?.repositoryDetail.append(RepositoryDetailModel(repositoryTitle: theResult.name ?? "", repositoryDescription: theResult.description ?? "", repositoryOwner: theResult.owner?.login ?? "", ownerImage: image ?? UIImage(), watchers: theResult.watchers ?? 0, createdAt: theResult.createdAt, updatedAt: theResult.updatedAt, forks: theResult.forksCount, stars: theResult.starredCount, contributorsUrl: theResult.contributorsUrl ?? "", languagesUrl: theResult.languagesUrl, activeIssues: theResult.openIssues))
+                    }
+                    self?.viewState = .showingResult
+                }
+            case .error(let errorData):
+                self?.APIResponseState = .fail
+                self?.showingAlert = true
+                self?.APIErrorResponse = errorData
+            }
+        }
+    }
+
     func sortRepositories(action: SortRepository){
         self.viewState = RepositoryViewState.loading
         
@@ -244,28 +289,28 @@ import Combine
     
     
     func loadRepoLanguages(URLString: String){
-        Task{
-            self.repoLanguages.removeAll()
-            self.totalLanguagesValue = 0
-            self.loadColorCodes()
+        Task{ [weak self] in
+            self?.repoLanguages.removeAll()
+            self?.totalLanguagesValue = 0
+            self?.loadColorCodes()
             let languages = try await APIService.shared.loadRepoLanguages(url: URLString)
-            let languageKeys = Set(self.hexColorCodes?.keys.map { String($0) } ?? [])
+            let languageKeys = Set(self?.hexColorCodes?.keys.map { String($0) } ?? [])
             
             for language in languages{
-                if let hexColorCode = self.hexColorCodes?[language.key], languageKeys.contains(language.key){
-                    self.repoLanguages.append(RepoLanguage(language: language.key, color: Color(hex: hexColorCode) ?? .purple, value: language.value, percentage: nil))
-                    self.totalLanguagesValue += language.value
+                if let hexColorCode = self?.hexColorCodes?[language.key], languageKeys.contains(language.key){
+                    self?.repoLanguages.append(RepoLanguage(language: language.key, color: Color(hex: hexColorCode) ?? .purple, value: language.value, percentage: nil))
+                    self?.totalLanguagesValue += language.value
                 }
             }
             
-            self.repoLanguages = self.repoLanguages.map { language in
+            self?.repoLanguages = self?.repoLanguages.map { language in
                 var languageWithPercentage = language
-                let percentage = ((Double(language.value) / Double(self.totalLanguagesValue))*100)
+                let percentage = ((Double(language.value) / Double(self?.totalLanguagesValue ?? 0))*100)
                 let roundedValue = round(percentage*100)/100.0
                 languageWithPercentage.percentage = roundedValue
                 print("\(languageWithPercentage.language): \(languageWithPercentage.percentage)%")
                 return languageWithPercentage
-            }
+            } as! [RepoLanguage]
         }
     }
     
@@ -291,13 +336,13 @@ import Combine
  // https://api.github.com/repos/apple/swift/readme
     
     func findReadmeURL(username: String, repoName: String){
-        Task{
+        Task{ [weak self] in
             let urlString = "https://api.github.com/repos/\(username)/\(repoName)/readme"
             let theReadmeURL = try await APIService.shared.getReadmeURL(url: urlString)
             if theReadmeURL == "Not Found"{
-                self.readmeURL = nil
+                self?.readmeURL = nil
             } else {
-                self.readmeURL = theReadmeURL
+                self?.readmeURL = theReadmeURL
             }
         }
         
