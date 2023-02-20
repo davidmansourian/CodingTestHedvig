@@ -27,11 +27,10 @@ import SwiftUI
             .receive(on: DispatchQueue.main)
             .sink{ [weak self] searchTerm in
                 self?.viewState = SearchResultViewState.loading
+                self?.profileResults.removeAll()
                 if searchTerm == ""{
-                    self?.profileResults.removeAll()
                     self?.viewState = SearchResultViewState.noSearchString
                 } else {
-                    self?.profileResults.removeAll()
                     let urlString = self?.userSearchURLBuilder(URLString: "https://api.github.com/search/users", searchTerm: searchTerm)
                     self?.fillUserDataModel(url: urlString ?? "")
                 }
