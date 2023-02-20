@@ -32,16 +32,29 @@ import SwiftUI
                     self?.viewState = SearchResultViewState.noSearchString
                 } else {
                     self?.profileResults.removeAll()
-                    self?.fillUserDataModel(url: "https://api.github.com/search/users?q=\(searchTerm)")
+                    let urlString = self?.userSearchURLBuilder(URLString: "https://api.github.com/search/users", searchTerm: searchTerm)
+                    self?.fillUserDataModel(url: urlString ?? "")
                 }
                 
             }
             .store(in: &cancellables)
     }
     
+    
+    func userSearchURLBuilder(URLString: String, searchTerm: String) -> String{
+        var components = URLComponents(string: URLString)
+        
+        // ?type=all&sort=updated&affiliation=collaborator&page=2&per_page=100
+        
+        components?.queryItems = [URLQueryItem(name: "q", value: searchTerm),
+        ]
+        
+        return components?.url?.absoluteString ?? ""
+    }
+    
     func checkStorageArr(){
         if recentSearches.count >= 10{
-            recentSearches.popLast()
+            recentSearches.remove(at: 0) // Was gonna use pop but it doesnt work properly
         }
     }
     
